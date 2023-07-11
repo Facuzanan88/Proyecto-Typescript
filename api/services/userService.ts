@@ -1,6 +1,6 @@
 import db from "../models/index";
 
-export const getUsers = async (res: any) => {
+export const getUsers = async (req: any, res: any) => {
   try {
     let result = await db.User.findAll();
 
