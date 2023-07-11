@@ -2,21 +2,21 @@ import { Model, UUIDV4 } from "sequelize";
 
 interface userAtributtes {
   id: string;
-  nombre: string;
-  apellido: string;
-  edad: string;
+  name: string;
+  subname: string;
+  age: string;
   email: string;
-  telefono: number;
+  cel: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model<userAtributtes> implements userAtributtes {
     id!: string;
-    nombre!: string;
-    apellido!: string;
-    edad!: string;
+    name!: string;
+    subname!: string;
+    age!: string;
     email!: string;
-    telefono!: number;
+    cel!: number;
   }
 
   User.init(
@@ -27,15 +27,15 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false,
         primaryKey: true,
       },
-      nombre: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      apellido: {
+      subname: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      edad: {
+      age: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -43,7 +43,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      telefono: {
+      cel: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
