@@ -30,7 +30,7 @@ app.use((req, res, next) => {
   next();
 });
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(port, () => {
     console.log(`App listening on port ${port}`);
   });

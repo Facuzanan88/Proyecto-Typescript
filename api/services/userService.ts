@@ -1,12 +1,14 @@
-import db from "../models/index";
+const users: userAtributtes[] = [];
 
-export const getUsers = async (req: any, res: any) => {
-  try {
-    let result = await db.User.findAll();
+interface userAtributtes {
+  id: string;
+  name: string;
+  subname: string;
+  age: string;
+  email: string;
+  cel: number;
+}
 
-    return res.status(200).json(result);
-  } catch (err) {
-    console.log(err);
-    return res.status(404).send("Users not found");
-  }
-};
+export function getAllUsers(): userAtributtes[] {
+  return users;
+}
