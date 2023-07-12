@@ -3,7 +3,7 @@ import { Model, UUIDV4 } from "sequelize";
 interface userAtributtes {
   id: string;
   name: string;
-  subname: string;
+  lastname: string;
   age: string;
   email: string;
   cel: number;
@@ -13,7 +13,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model<userAtributtes> implements userAtributtes {
     id!: string;
     name!: string;
-    subname!: string;
+    lastname!: string;
     age!: string;
     email!: string;
     cel!: number;
@@ -31,7 +31,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      subname: {
+      lastname: {
         type: DataTypes.STRING,
         allowNull: false,
       },
