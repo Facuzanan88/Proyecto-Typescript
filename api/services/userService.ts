@@ -1,23 +1,13 @@
 import db from "../models";
 import { v4 as uuidv4 } from "uuid";
+import UserAtributtes from "../interfaces/user";
 
-const users: userAtributtes[] = [];
-
-interface userAtributtes {
-  id: string;
-  name: string;
-  subname: string;
-  age: string;
-  email: string;
-  cel: number;
-}
-
-export async function getUsers(): Promise<userAtributtes[]> {
+export async function getUsers(): Promise<UserAtributtes[]> {
   let result = await db.User.findAll();
   return result;
 }
 
-export const createUser = async (userData: any): Promise<userAtributtes> => {
+export const createUser = async (userData: any): Promise<UserAtributtes> => {
   let result = await db.User.create({
     id: uuidv4(),
     name: userData.name,
