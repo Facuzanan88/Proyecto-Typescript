@@ -18,3 +18,8 @@ export const createUser = async (userData: any): Promise<UserAtributtes> => {
   });
   return result;
 };
+
+export const getAUser = async (id: string): Promise<UserAtributtes> => {
+  let result = await db.User.findByPk(id);
+  return result;
+};
