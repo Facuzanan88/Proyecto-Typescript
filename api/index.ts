@@ -1,6 +1,7 @@
 import express from "express";
 import db from "./models";
-import router from "./routes";
+import userRouter from "./routes/user";
+import cutsRouter from "./routes/cuts";
 import cors from "cors";
 import morgan from "morgan";
 import bodyParser from "body-parser";
@@ -10,7 +11,8 @@ const app = express();
 const port = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cors());
-app.use("/", router);
+app.use("/", userRouter);
+app.use("/", cutsRouter);
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
@@ -30,7 +32,7 @@ app.use((req, res, next) => {
   next();
 });
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(port, () => {
     console.log(`App listening on port ${port}`);
   });
