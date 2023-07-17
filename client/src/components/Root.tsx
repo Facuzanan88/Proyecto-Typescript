@@ -27,6 +27,3 @@ const Root: React.FC<{}> = () => {
 };
 
 export default Root;
-function setUser(result: any) {
-  throw new Error("Function not implemented.");
-}
