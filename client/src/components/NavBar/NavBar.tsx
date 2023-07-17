@@ -21,6 +21,8 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 import { ColorModeSwitcher } from "../../ColorModeSwitcher";
+
+import logo from "../../Assest/logo.jpg";
 /* import RaesLogo from "../../Assets/raes.png"; */
 
 import { useState, useEffect } from "react";
@@ -74,17 +76,16 @@ const NavBar = () => {
           />
         </Flex>
         <Link href="/">
-          {/*  <Image
-            src={RaesLogo}
+          <Image
+            src={logo}
             alt="Raes Logo"
             width={12}
             height={12}
             margin={{ base: "1", md: "2" }}
             padding={{ base: "-12" }}
-          /> */}
-          <div>LOGO</div>
+          />
         </Link>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "center" }}>
           <Flex display={{ base: "none", md: "flex" }}>
             <DesktopNav />
           </Flex>
@@ -117,7 +118,7 @@ const DesktopNav = () => {
             <PopoverTrigger>
               <Link
                 p={2}
-                href={navItem.href ?? "#"}
+                href={navItem.href ?? ""}
                 fontSize={"sm"}
                 fontWeight={500}
                 color={linkColor}
@@ -266,12 +267,20 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: "Propiedades",
-    href: "/properties",
+    label: "Productos",
+    /* href: "/properties", */
     children: [
       {
-        label: "Encontra lo que buscas",
-        href: "/properties",
+        label: "Vaca",
+        href: "/cow",
+      },
+      {
+        label: "Cerdo",
+        href: "/pig",
+      },
+      {
+        label: "Embutidos",
+        href: "/sausages",
       },
     ],
   },
