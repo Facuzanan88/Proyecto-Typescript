@@ -4,4 +4,5 @@ export default interface CutsAtributtes {
   photo: string;
   weight: number;
   fat: number;
+  bone: number;
 }

@@ -1,7 +1,7 @@
 import express from "express";
 import db from "./models";
 import userRouter from "./routes/user";
-import cutsRouter from "./routes/cuts";
+import cowCutsRouter from "./routes/CowCuts";
 import cors from "cors";
 import morgan from "morgan";
 import bodyParser from "body-parser";
@@ -13,7 +13,7 @@ const port = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 app.use("/", userRouter);
-app.use("/", cutsRouter);
+app.use("/", cowCutsRouter);
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());

@@ -2,15 +2,16 @@ import { Model, UUIDV4 } from "sequelize";
 import CutsAtributtes from "../interfaces/cuts";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Cuts extends Model<CutsAtributtes> implements CutsAtributtes {
+  class CowCuts extends Model<CutsAtributtes> implements CutsAtributtes {
     id!: string;
     name!: string;
     photo!: string;
     weight!: number;
     fat!: number;
+    bone!: number;
   }
 
-  Cuts.init(
+  CowCuts.init(
     {
       id: {
         type: DataTypes.UUID,
@@ -34,12 +35,16 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.FLOAT,
         allowNull: true,
       },
+      bone: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+      },
     },
     {
       sequelize,
-      modelName: "Cuts",
+      modelName: "CowCuts",
     }
   );
 
-  return Cuts;
+  return CowCuts;
 };
