@@ -6,9 +6,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
     id!: string;
     name!: string;
     lastname!: string;
-    age!: string;
     email!: string;
     cel!: number;
+    street!: string;
+    number!: number;
+    apartment!: boolean;
+    comment!: string;
   }
 
   User.init(
@@ -27,10 +30,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      age: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -38,6 +37,22 @@ module.exports = (sequelize: any, DataTypes: any) => {
       cel: {
         type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      street: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      number: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      apartment: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      comment: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {
