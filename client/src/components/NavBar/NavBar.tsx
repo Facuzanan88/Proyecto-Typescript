@@ -23,13 +23,12 @@ import {
 import { ColorModeSwitcher } from "../../ColorModeSwitcher";
 
 import logo from "../../Assest/logo.jpg";
-/* import RaesLogo from "../../Assets/raes.png"; */
 
 import { useState, useEffect } from "react";
-/* import LoginButton from "../LoginButtons/LoginButton";
-import LogoutButton from "../LoginButtons/LogoutButton";
-import { RootState } from "../../Redux/store";
- */
+import LogInButton from "../LoginButtons/LogInButton";
+import LogOutButtn from "../LoginButtons/LogOutButton";
+/* import { RootState } from "../../Redux/store"; */
+
 const NavBar = () => {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -91,9 +90,8 @@ const NavBar = () => {
           </Flex>
         </Flex>
 
-        {/*    <LoginButton />
-        <LogoutButton /> */}
-        <div>LOGIN</div>
+        <LogInButton />
+        <LogOutButtn />
 
         <ColorModeSwitcher />
       </Flex>
