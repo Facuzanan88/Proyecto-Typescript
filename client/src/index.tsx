@@ -7,7 +7,6 @@ import { Auth0Provider } from "@auth0/auth0-react";
 
 const domain: string | undefined = process.env.REACT_APP_DOMAIN || "ERRORAUTH0";
 const clientID = process.env.REACT_APP_CLIENT_ID || "ERRORAUTH0";
-console.log(domain, clientID);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Root from "./components/Root";
 import Error from "./components/Error";
 import NavBar from "./components/NavBar/NavBar";
+import Profile from "./components/LoginButtons/Profile";
 
 function App() {
   return (

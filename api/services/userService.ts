@@ -15,6 +15,10 @@ export const createUser = async (userData: any): Promise<UserAtributtes> => {
     age: userData.age,
     email: userData.email,
     cel: userData.cel,
+    street: userData.street,
+    number: userData.number,
+    apartment: userData.apartment,
+    comment: userData.comment,
   });
   return result;
 };
