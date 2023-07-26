@@ -23,7 +23,7 @@ const Profile: React.FC<{}> = () => {
 
   const { getUser } = useUserStore();
   const handleClick = () => {
-    getUser("dda03e98-716c-4429-9c1e-9e0bcc2d0573");
+    getUser("c6a655c5-4222-4fc8-bfed-e32028a01f9a");
   };
 
   return (

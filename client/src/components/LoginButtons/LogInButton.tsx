@@ -2,9 +2,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Box, Stack, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LogInButton: React.FC<{}> = () => {
   const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+
+  const navigate = useNavigate();
 
   return (
     <Box>

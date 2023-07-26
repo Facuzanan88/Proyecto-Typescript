@@ -5,6 +5,7 @@ import Root from "./components/Root";
 import Error from "./components/Error";
 import NavBar from "./components/NavBar/NavBar";
 import Profile from "./components/LoginButtons/Profile";
+import Registro from "./components/Registro/Registro";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" Component={Root} />
+        <Route path="/registrarse" Component={Registro} />
         <Route path="*" Component={Error} />
       </Routes>
     </ChakraProvider>
