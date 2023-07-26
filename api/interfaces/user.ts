@@ -8,4 +8,5 @@ export default interface UserAtributtes {
   number: number;
   apartment: boolean;
   comment: string;
+  deleted: boolean;
 }

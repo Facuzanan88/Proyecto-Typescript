@@ -3,6 +3,7 @@ import * as userService from "../services/userService";
 
 export async function getUsers(req: Request, res: Response): Promise<void> {
   const { id } = req.params;
+  const email = req.query.email;
 
   if (id) {
     try {
@@ -11,6 +12,14 @@ export async function getUsers(req: Request, res: Response): Promise<void> {
     } catch (error) {
       console.log(error);
       res.status(500).send(`The id ${id} not found`);
+    }
+  } else if (typeof email === "string") {
+    try {
+      let result = await userService.getUserByMail(email);
+      res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("We could not find the user");
     }
   } else {
     try {
