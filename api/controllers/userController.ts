@@ -16,10 +16,13 @@ export async function getUsers(req: Request, res: Response): Promise<void> {
   } else if (typeof email === "string") {
     try {
       let result = await userService.getUserByMail(email);
-      res.status(200).json(result);
+      if (result) {
+        res.status(200).json(result);
+      } else {
+        res.status(200).json();
+      }
     } catch (error) {
       console.log(error);
-      res.status(500).send("We could not find the user");
     }
   } else {
     try {

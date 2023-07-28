@@ -1,13 +1,38 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Box, Stack, Button } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../../store/userStore";
 
 const LogInButton: React.FC<{}> = () => {
   const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    loginWithRedirect();
+  };
+
+  const userRegister = useUserStore((state) => ({
+    id: state.id,
+    name: state.name,
+    lastname: state.lastname,
+    email: state.email,
+    cel: state.cel,
+    street: state.street,
+    number: state.number,
+    apartment: state.apartment,
+    comment: state.comment,
+  }));
+
+  const { userByMail } = useUserStore();
+
+  useEffect(() => {
+    if (user && user.email) {
+      userByMail(user.email);
+    }
+  });
 
   return (
     <Box>
