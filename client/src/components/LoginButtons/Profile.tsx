@@ -23,50 +23,37 @@ const Profile: React.FC<{}> = () => {
   const navigate = useNavigate();
 
   const { getUser, userByMail } = useUserStore();
-  const handleClick = () => {
-    getUser("c6a655c5-4222-4fc8-bfed-e32028a01f9a");
-  };
-
-  /*  useEffect(() => {
-    if (user?.email) {
-      const usuario: Promise<UserAtributtes> | undefined = userByMail(
-        user.email
-      );
-
-      if (usuario.number) {
-        history.pushState("/");
-      }
-    }
-  }); */
 
   useEffect(() => {
-    if (user?.email) {
-      const usuarioPromise: Promise<UserAtributtes> | undefined = userByMail(
-        user.email
-      );
+    if (user) {
+      if (user.email) {
+        const usuarioPromise: Promise<UserAtributtes> | undefined = userByMail(
+          user.email
+        );
 
-      // Verificar si la promesa es 'undefined'
-      if (!usuarioPromise) {
-        // Manejar el caso en el que 'userByMail' devuelva 'undefined'
-        navigate("/");
-        console.error("La promesa es 'undefined'.");
-        return;
+        // Verificar si la promesa es 'undefined'
+        if (!usuarioPromise) {
+          // Manejar el caso en el que 'userByMail' devuelva 'undefined'
+          navigate("/");
+          console.error("La promesa es 'undefined'.");
+          return;
+        }
+
+        // Usar 'then' para trabajar con el resultado de la promesa
+        usuarioPromise
+          .then((usuario: UserAtributtes) => {
+            // Aquí 'usuario' es el objeto UserAtributtes resultante
+            if (usuario.number === undefined) {
+              console.log("redireccion");
+              navigate("/");
+            }
+            console.log("existe un tal number 1000");
+          })
+          .catch((error) => {
+            // Manejo de errores si la promesa es rechazada
+            console.error("Error al obtener el usuario:", error);
+          });
       }
-
-      // Usar 'then' para trabajar con el resultado de la promesa
-      usuarioPromise
-        .then((usuario: UserAtributtes) => {
-          // Aquí 'usuario' es el objeto UserAtributtes resultante
-          if (usuario.number === undefined) {
-            console.log("redireccion");
-            navigate("/");
-          }
-          console.log("existe un tal number 1000");
-        })
-        .catch((error) => {
-          // Manejo de errores si la promesa es rechazada
-          console.error("Error al obtener el usuario:", error);
-        });
     }
   }, [navigate, user, userByMail]);
 
@@ -74,8 +61,8 @@ const Profile: React.FC<{}> = () => {
     <Box>
       {isAuthenticated && (
         <Box>
-          <Text>{userByStore.name}</Text>
-          <Button onClick={() => handleClick()}>user</Button>
+          <Text>Profile</Text>
+          <Button>user</Button>
         </Box>
       )}
     </Box>
