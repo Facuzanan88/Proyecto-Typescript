@@ -50,26 +50,17 @@ const Registro: React.FC<{}> = () => {
           user.email
         );
 
-        // Verificar si la promesa es 'undefined'
         if (!usuarioPromise) {
-          // Manejar el caso en el que 'userByMail' devuelva 'undefined'
-          navigate("/");
-          console.error("La promesa es 'undefined'.");
           return;
         }
 
-        // Usar 'then' para trabajar con el resultado de la promesa
         usuarioPromise
           .then((usuario: UserAtributtes) => {
-            // Aquí 'usuario' es el objeto UserAtributtes resultante
-            if (usuario.number === undefined) {
-              console.log("redireccion");
+            if (usuario.number !== undefined) {
               navigate("/");
             }
-            console.log("existe un tal number 1000");
           })
           .catch((error) => {
-            // Manejo de errores si la promesa es rechazada
             console.error("Error al obtener el usuario:", error);
           });
       }

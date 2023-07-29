@@ -26,14 +26,6 @@ const LogInButton: React.FC<{}> = () => {
     comment: state.comment,
   }));
 
-  const { userByMail } = useUserStore();
-
-  useEffect(() => {
-    if (user && user.email) {
-      userByMail(user.email);
-    }
-  });
-
   return (
     <Box>
       {!isAuthenticated && (
