@@ -61,6 +61,7 @@ const Profile: React.FC<{}> = () => {
             console.log("redireccion");
             navigate("/");
           }
+          console.log("existe un tal number 1000");
         })
         .catch((error) => {
           // Manejo de errores si la promesa es rechazada
