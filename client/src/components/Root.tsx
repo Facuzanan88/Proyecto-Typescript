@@ -13,7 +13,9 @@ const Root: React.FC<{}> = () => {
   };
 
   const handleGet = async () => {
-    console.log(user);
+    if (user) {
+      console.log(user);
+    }
   };
 
   return (

@@ -6,6 +6,6 @@ export default interface UserAtributtes {
   cel: number | undefined;
   street: string | undefined;
   number: number | undefined;
-  apartment: boolean | undefined;
-  comment: string | undefined;
+  apartment?: boolean | undefined;
+  comment?: string | undefined;
 }

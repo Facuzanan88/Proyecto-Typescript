@@ -13,7 +13,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" Component={Root} />
-        <Route path="/registrarse" Component={Profile} />
+        <Route path="/registrarse" Component={Registro} />
         <Route path="*" Component={Error} />
       </Routes>
     </ChakraProvider>
