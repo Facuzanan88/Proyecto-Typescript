@@ -51,12 +51,14 @@ const Registro: React.FC<{}> = () => {
         const usuarioPromise: Promise<UserAtributtes> | undefined = userByMail(
           user.email
         );
-        const userLogin = {
-          name: user.given_name,
-          lastname: user.family_name,
-          email: user.email,
-        };
-        createUser(userLogin);
+        if (usuarioPromise === undefined) {
+          const userLogin = {
+            name: user.given_name,
+            lastname: user.family_name,
+            email: user.email,
+          };
+          createUser(userLogin);
+        }
         if (!usuarioPromise) {
           return;
         }
