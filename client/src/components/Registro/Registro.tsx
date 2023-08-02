@@ -10,6 +10,7 @@ import {
   Input,
   Grid,
   Button,
+  Checkbox,
 } from "@chakra-ui/react";
 
 const Registro: React.FC<{}> = () => {
@@ -45,17 +46,13 @@ const Registro: React.FC<{}> = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
       if (user.email) {
         const usuarioPromise: Promise<UserAtributtes> | undefined = userByMail(
           user.email
         );
-
         if (!usuarioPromise) {
           return;
         }
-        console.log(userByStore, "store");
-
         usuarioPromise
           .then((usuario: UserAtributtes) => {
             if (usuario.number !== undefined) {
@@ -86,45 +83,88 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="name"
-            value={user?.given_name}
+            value={userByStore?.name}
             onChange={handleInputChange}
             required
           />
         </FormControl>
+
         <FormControl id="lastname" w="50%">
           <FormLabel>Apellido</FormLabel>
           <Input
             type="text"
             name="lastname"
-            value={user?.family_name}
+            value={userByStore?.lastname}
             onChange={handleInputChange}
             required
           />
         </FormControl>
+
         <FormControl id="email" w="50%">
           <FormLabel>E-Mail</FormLabel>
           <Input
             type="text"
             name="email"
-            value={user?.email}
+            value={userByStore?.email}
             onChange={handleInputChange}
             required
           />
         </FormControl>
-        <FormControl id="phone" w="50%">
-          <FormLabel>Telefono</FormLabel>
+
+        <FormControl id="cel" w="50%">
+          <FormLabel>Celular</FormLabel>
           <Input
             type="tel"
-            name="phone"
-            value={user?.phone}
+            name="cel"
+            value={userByStore?.cel}
             onChange={handleInputChange}
             required
           />
         </FormControl>
-        <FormControl id="photo" w="50%">
-          <FormLabel>Foto</FormLabel>
-          <Input type="text" name="photo" onChange={handleInputChange} />
+
+        <FormControl id="street" w="50%">
+          <FormLabel>Calle</FormLabel>
+          <Input
+            type="text"
+            name="street"
+            value={userByStore?.street}
+            onChange={handleInputChange}
+            required
+          />
         </FormControl>
+
+        <FormControl id="number" w="50%">
+          <FormLabel>Numero</FormLabel>
+          <Input
+            type="number"
+            name="number"
+            value={userByStore?.number}
+            onChange={handleInputChange}
+            required
+          />
+        </FormControl>
+
+        <FormControl id="apartment" w="50%">
+          <FormLabel>Departamento</FormLabel>
+          <Checkbox
+            name="apartment"
+            isChecked={userByStore?.apartment}
+            onChange={handleInputChange}
+            required
+          />
+        </FormControl>
+
+        <FormControl id="comment" w="50%">
+          <FormLabel>Comentario</FormLabel>
+          <Input
+            type="text"
+            name="comment"
+            value={userByStore?.comment}
+            onChange={handleInputChange}
+            required
+          />
+        </FormControl>
+
         <Grid pb="4">
           <Button type="submit">Guardar</Button>
         </Grid>

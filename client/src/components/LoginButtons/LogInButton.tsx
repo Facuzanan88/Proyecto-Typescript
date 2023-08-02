@@ -12,24 +12,7 @@ const LogInButton: React.FC<{}> = () => {
 
   const handleClick = () => {
     loginWithRedirect();
-
-    setTimeout(() => {
-      console.log(userRegister);
-    }, 5000);
-
-    console.log(userRegister);
   };
-  const userRegister = useUserStore((state) => ({
-    id: state.id,
-    name: state.name,
-    lastname: state.lastname,
-    email: state.email,
-    cel: state.cel,
-    street: state.street,
-    number: state.number,
-    apartment: state.apartment,
-    comment: state.comment,
-  }));
 
   return (
     <Box>
@@ -49,21 +32,19 @@ const LogInButton: React.FC<{}> = () => {
           >
             Ingresar
           </Button>
-          <Link to="/registrarse">
-            <Button
-              display={{ base: "none", md: "inline-flex" }}
-              fontSize={"sm"}
-              fontWeight={600}
-              color={"white"}
-              bg={"red.500"}
-              _hover={{
-                bg: "red.300",
-              }}
-              onClick={() => handleClick()}
-            >
-              Registrarse
-            </Button>
-          </Link>
+          <Button
+            display={{ base: "none", md: "inline-flex" }}
+            fontSize={"sm"}
+            fontWeight={600}
+            color={"white"}
+            bg={"red.500"}
+            _hover={{
+              bg: "red.300",
+            }}
+            onClick={() => handleClick()}
+          >
+            Registrarse
+          </Button>
         </Stack>
       )}
     </Box>
