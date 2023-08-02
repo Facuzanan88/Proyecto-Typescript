@@ -12,6 +12,7 @@ import {
   Button,
   Checkbox,
 } from "@chakra-ui/react";
+import { createUserLogin } from "../../services/usersService";
 
 const Registro: React.FC<{}> = () => {
   const { logout, isAuthenticated, user } = useAuth0();
@@ -42,7 +43,7 @@ const Registro: React.FC<{}> = () => {
 
   const navigate = useNavigate();
 
-  const { getUser, userByMail } = useUserStore();
+  const { userByMail, createUser } = useUserStore();
 
   useEffect(() => {
     if (user) {
@@ -50,12 +51,18 @@ const Registro: React.FC<{}> = () => {
         const usuarioPromise: Promise<UserAtributtes> | undefined = userByMail(
           user.email
         );
+        const userLogin = {
+          name: user.given_name,
+          lastname: user.family_name,
+          email: user.email,
+        };
+        createUser(userLogin);
         if (!usuarioPromise) {
           return;
         }
         usuarioPromise
           .then((usuario: UserAtributtes) => {
-            if (usuario.number !== undefined) {
+            if (usuario.number !== null) {
               navigate("/");
             }
           })

@@ -21,3 +21,14 @@ export const userByMail = async (email: string) => {
     console.log(err);
   }
 };
+
+export const createUserLogin = async (user: object) => {
+  try {
+    console.log("ejecuta la accion");
+    const res = await instance.post(endpoint, user);
+    const newUser = await res.data;
+    return newUser;
+  } catch (err) {
+    console.log(err);
+  }
+};
