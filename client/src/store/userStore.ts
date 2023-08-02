@@ -27,8 +27,8 @@ export const useUserStore = create<UserStoreState>((set) => ({
       set((state) => ({
         ...state,
         id: user.id,
-        name: user.name,
-        lastname: user.lastname,
+        name: user.given_name,
+        lastname: user.family_name,
         email: user.email,
         cel: user.cel,
         street: user.street,

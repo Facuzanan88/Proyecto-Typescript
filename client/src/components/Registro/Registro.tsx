@@ -45,6 +45,7 @@ const Registro: React.FC<{}> = () => {
 
   useEffect(() => {
     if (user) {
+      console.log(user);
       if (user.email) {
         const usuarioPromise: Promise<UserAtributtes> | undefined = userByMail(
           user.email
@@ -53,6 +54,7 @@ const Registro: React.FC<{}> = () => {
         if (!usuarioPromise) {
           return;
         }
+        console.log(userByStore, "store");
 
         usuarioPromise
           .then((usuario: UserAtributtes) => {
@@ -84,7 +86,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="name"
-            value={user?.name}
+            value={user?.given_name}
             onChange={handleInputChange}
             required
           />
@@ -94,7 +96,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="lastname"
-            value={user?.lastname}
+            value={user?.family_name}
             onChange={handleInputChange}
             required
           />

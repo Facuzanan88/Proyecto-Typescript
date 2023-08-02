@@ -12,8 +12,13 @@ const LogInButton: React.FC<{}> = () => {
 
   const handleClick = () => {
     loginWithRedirect();
-  };
 
+    setTimeout(() => {
+      console.log(userRegister);
+    }, 5000);
+
+    console.log(userRegister);
+  };
   const userRegister = useUserStore((state) => ({
     id: state.id,
     name: state.name,
@@ -40,7 +45,7 @@ const LogInButton: React.FC<{}> = () => {
             fontSize={"sm"}
             fontWeight={400}
             variant={"link"}
-            onClick={() => loginWithRedirect()}
+            onClick={() => handleClick()}
           >
             Ingresar
           </Button>
@@ -54,6 +59,7 @@ const LogInButton: React.FC<{}> = () => {
               _hover={{
                 bg: "red.300",
               }}
+              onClick={() => handleClick()}
             >
               Registrarse
             </Button>

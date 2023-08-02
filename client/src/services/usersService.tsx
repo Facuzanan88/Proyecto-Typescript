@@ -11,3 +11,13 @@ export const getUsers = async () => {
     console.log(err);
   }
 };
+
+export const userByMail = async (email: string) => {
+  try {
+    const result = await instance.get(`${endpoint}?email=${email}`);
+    console.log(result);
+    return result.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
