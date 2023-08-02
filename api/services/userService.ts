@@ -23,6 +23,22 @@ export const createUser = async (userData: any): Promise<UserAtributtes> => {
   return result;
 };
 
+export const modifyUser = async (userData: any): Promise<UserAtributtes> => {
+  let result = await db.User.findByPk(userData.id);
+
+  await result.update({
+    name: userData.name,
+    lastname: userData.lastname,
+    age: userData.age,
+    cel: userData.cel,
+    street: userData.street,
+    number: userData.number,
+    apartment: userData.apartment,
+    comment: userData.comment,
+  });
+  return result;
+};
+
 export const getAUser = async (id: string): Promise<UserAtributtes> => {
   let result = await db.User.findByPk(id);
   return result;

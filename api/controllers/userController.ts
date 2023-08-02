@@ -45,3 +45,14 @@ export async function postUser(req: Request, res: Response): Promise<void> {
     res.status(500).send("We could not create the user");
   }
 }
+
+export async function putUser(req: Request, res: Response): Promise<void> {
+  const updateUser = req.body;
+  try {
+    let result = await userService.modifyUser(updateUser);
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("We could not update the user");
+  }
+}
