@@ -17,18 +17,6 @@ import { createUserLogin } from "../../services/usersService";
 const Registro: React.FC<{}> = () => {
   const { logout, isAuthenticated, user } = useAuth0();
 
-  const [usuario, setUsuario] = useState<UserAtributtes>({
-    id: "",
-    name: "",
-    lastname: "",
-    email: "",
-    cel: 0,
-    street: "",
-    number: 0,
-    apartment: false,
-    comment: "",
-  });
-
   const userByStore = useUserStore((state) => ({
     id: state.id,
     name: state.name,
@@ -40,6 +28,20 @@ const Registro: React.FC<{}> = () => {
     apartment: state.apartment,
     comment: state.comment,
   }));
+
+  const [apartment, setApartment] = useState(userByStore?.apartment || false);
+
+  const [usuario, setUsuario] = useState<UserAtributtes>({
+    id: userByStore.id,
+    name: userByStore?.name,
+    lastname: userByStore.lastname,
+    email: userByStore.email,
+    cel: userByStore.cel,
+    street: userByStore.street,
+    number: userByStore.number,
+    apartment: userByStore.apartment,
+    comment: userByStore.comment,
+  });
 
   const navigate = useNavigate();
 
@@ -80,6 +82,13 @@ const Registro: React.FC<{}> = () => {
     setUsuario({ ...usuario, [name]: value });
   };
 
+  const handleInputCheck = (event: { target: { name: any; checked: any } }) => {
+    const { name, checked } = event.target;
+    if (name === "apartment") {
+      setApartment(checked);
+    }
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
@@ -92,7 +101,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="name"
-            value={userByStore?.name}
+            value={usuario.name ? usuario.name : userByStore.name}
             onChange={handleInputChange}
             required
           />
@@ -103,7 +112,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="lastname"
-            value={userByStore?.lastname}
+            value={usuario.lastname ? usuario.lastname : userByStore.lastname}
             onChange={handleInputChange}
             required
           />
@@ -114,7 +123,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="email"
-            value={userByStore?.email}
+            value={usuario.email ? usuario.email : userByStore.email}
             onChange={handleInputChange}
             required
           />
@@ -125,7 +134,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="tel"
             name="cel"
-            value={userByStore?.cel}
+            value={usuario.cel ? usuario.cel : userByStore.cel}
             onChange={handleInputChange}
             required
           />
@@ -136,7 +145,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="street"
-            value={userByStore?.street}
+            value={usuario.street ? usuario.street : userByStore.street}
             onChange={handleInputChange}
             required
           />
@@ -147,7 +156,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="number"
             name="number"
-            value={userByStore?.number}
+            value={usuario.number ? usuario.number : userByStore.number}
             onChange={handleInputChange}
             required
           />
@@ -157,8 +166,8 @@ const Registro: React.FC<{}> = () => {
           <FormLabel>Departamento</FormLabel>
           <Checkbox
             name="apartment"
-            isChecked={userByStore?.apartment}
-            onChange={handleInputChange}
+            isChecked={apartment}
+            onChange={handleInputCheck}
             required
           />
         </FormControl>
@@ -168,7 +177,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="comment"
-            value={userByStore?.comment}
+            value={usuario.comment ? usuario.comment : userByStore.comment}
             onChange={handleInputChange}
             required
           />
