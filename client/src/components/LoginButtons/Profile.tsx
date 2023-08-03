@@ -27,7 +27,7 @@ const Profile: React.FC<{}> = () => {
   useEffect(() => {
     if (user) {
       if (user.email) {
-        const usuarioPromise: Promise<UserAtributtes> | undefined = userByMail(
+        const usuarioPromise: Promise<UserAtributtes> | null = userByMail(
           user.email
         );
 

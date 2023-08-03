@@ -13,6 +13,7 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import { createUserLogin } from "../../services/usersService";
+import { promises } from "dns";
 
 const Registro: React.FC<{}> = () => {
   const { logout, isAuthenticated, user } = useAuth0();
@@ -45,15 +46,16 @@ const Registro: React.FC<{}> = () => {
 
   const navigate = useNavigate();
 
-  const { userByMail, createUser } = useUserStore();
+  const { userByMail, createUser, modifyUser } = useUserStore();
 
   useEffect(() => {
     if (user) {
       if (user.email) {
-        const usuarioPromise: Promise<UserAtributtes> | undefined = userByMail(
+        const usuarioPromise: Promise<UserAtributtes> | null = userByMail(
           user.email
         );
-        if (usuarioPromise === undefined) {
+        console.log(usuarioPromise);
+        if (usuarioPromise instanceof Promise && usuarioPromise === null) {
           const userLogin = {
             name: user.given_name,
             lastname: user.family_name,
@@ -91,6 +93,8 @@ const Registro: React.FC<{}> = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(usuario);
+    console.log(apartment);
   };
 
   return (
@@ -103,7 +107,6 @@ const Registro: React.FC<{}> = () => {
             name="name"
             value={usuario.name ? usuario.name : userByStore.name}
             onChange={handleInputChange}
-            required
           />
         </FormControl>
 
@@ -114,7 +117,6 @@ const Registro: React.FC<{}> = () => {
             name="lastname"
             value={usuario.lastname ? usuario.lastname : userByStore.lastname}
             onChange={handleInputChange}
-            required
           />
         </FormControl>
 
@@ -125,7 +127,6 @@ const Registro: React.FC<{}> = () => {
             name="email"
             value={usuario.email ? usuario.email : userByStore.email}
             onChange={handleInputChange}
-            required
           />
         </FormControl>
 
@@ -136,7 +137,6 @@ const Registro: React.FC<{}> = () => {
             name="cel"
             value={usuario.cel ? usuario.cel : userByStore.cel}
             onChange={handleInputChange}
-            required
           />
         </FormControl>
 
@@ -147,7 +147,6 @@ const Registro: React.FC<{}> = () => {
             name="street"
             value={usuario.street ? usuario.street : userByStore.street}
             onChange={handleInputChange}
-            required
           />
         </FormControl>
 
@@ -168,7 +167,6 @@ const Registro: React.FC<{}> = () => {
             name="apartment"
             isChecked={apartment}
             onChange={handleInputCheck}
-            required
           />
         </FormControl>
 
@@ -179,7 +177,6 @@ const Registro: React.FC<{}> = () => {
             name="comment"
             value={usuario.comment ? usuario.comment : userByStore.comment}
             onChange={handleInputChange}
-            required
           />
         </FormControl>
 
