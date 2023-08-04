@@ -5,7 +5,7 @@ import UserAtributtes from "../interfaces/user";
 
 interface UserStoreState extends UserAttributes {
   getUser: (id: string) => Promise<void>;
-  createUser: (user: object) => Promise<void>;
+  createUser: (user: object) => Promise<UserAtributtes>;
   userByMail: (email: string) => Promise<UserAtributtes> | null;
   modifyUser: (updateUser: object) => Promise<void>;
 }
@@ -60,6 +60,7 @@ export const useUserStore = create<UserStoreState>((set) => ({
         apartment: newUser.apartment,
         comment: newUser.comment,
       }));
+      return newUser;
     } catch (error) {
       // Manejar el error, por ejemplo, mostrar un mensaje de error o registrarlo.
       console.error("Error al obtener el usuario:", error);

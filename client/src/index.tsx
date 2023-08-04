@@ -18,7 +18,7 @@ root.render(
         domain={domain}
         clientId={clientID}
         authorizationParams={{
-          redirect_uri: `${window.location.origin}/registrarse`,
+          redirect_uri: `${window.location.origin}`,
         }}
       >
         <App />
