@@ -12,8 +12,6 @@ import {
   Button,
   Checkbox,
 } from "@chakra-ui/react";
-import { createUserLogin } from "../../services/usersService";
-import { promises } from "dns";
 
 const Registro: React.FC<{}> = () => {
   const { logout, isAuthenticated, user } = useAuth0();
@@ -77,7 +75,7 @@ const Registro: React.FC<{}> = () => {
           });
       }
     }
-  }, [navigate, user, userByMail]);
+  }, [navigate, user, userByMail, createUser]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -93,8 +91,9 @@ const Registro: React.FC<{}> = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(usuario);
-    console.log(apartment);
+    usuario.apartment = apartment;
+    modifyUser(usuario);
+    navigate("/");
   };
 
   return (
