@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 const Registro: React.FC<{}> = () => {
-  const { logout, isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
 
   const userByStore = useUserStore((state) => ({
     id: state.id,
