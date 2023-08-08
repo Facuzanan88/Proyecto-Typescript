@@ -4,7 +4,7 @@ const Error: React.FC<{}> = () => {
   return (
     <>
       <div>
-        <h1>ERROR DE URL</h1>
+        <h1>ERROR DE URL - REDIRECCIONAR - </h1>
       </div>
     </>
   );
