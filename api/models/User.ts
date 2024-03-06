@@ -37,7 +37,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         unique: true,
       },
       cel: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: true,
       },
       street: {
