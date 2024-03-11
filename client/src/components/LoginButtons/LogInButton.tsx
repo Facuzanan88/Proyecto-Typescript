@@ -12,7 +12,7 @@ const LogInButton: React.FC<{}> = () => {
 
   const [usuario, setUsuario] = useState<UserAtributtes | null>();
 
-  const { userByMail, createUser, modifyUser } = useUserStore();
+  const { userByMail, /* createUser,  */ modifyUser } = useUserStore();
 
   const navigate = useNavigate();
 

@@ -44,7 +44,7 @@ const Registro: React.FC<{}> = () => {
 
   const navigate = useNavigate();
 
-  const { userByMail, createUser, modifyUser } = useUserStore();
+  const { userByMail, /* createUser, */ modifyUser } = useUserStore();
 
   useEffect(() => {
     if (user) {
@@ -59,7 +59,7 @@ const Registro: React.FC<{}> = () => {
             lastname: user.family_name,
             email: user.email,
           };
-          createUser(userLogin);
+          /*   createUser(userLogin); */
         }
         if (!usuarioPromise) {
           return;
@@ -75,7 +75,7 @@ const Registro: React.FC<{}> = () => {
           });
       }
     }
-  }, [navigate, user, userByMail, createUser]);
+  }, [navigate, user, userByMail /* createUser */]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

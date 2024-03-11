@@ -4,26 +4,27 @@ import axios from "axios";
 import UserAtributtes from "../interfaces/user";
 
 interface UserStoreState extends UserAttributes {
-  getUser: (id: string) => Promise<void>;
+  getUser: (id: string) => Promise<any>;
   createUser: (user: object) => Promise<UserAtributtes>;
   userByMail: (email: string) => Promise<UserAtributtes> | null;
   modifyUser: (updateUser: object) => Promise<void>;
 }
 
 export const useUserStore = create<UserStoreState>((set) => ({
-  id: undefined,
-  name: undefined,
-  lastname: undefined,
-  email: undefined,
-  cel: undefined,
-  street: undefined,
-  number: undefined,
-  apartment: undefined,
-  comment: undefined,
+  id: "",
+  name: "",
+  lastname: "",
+  email: "",
+  cel: 0,
+  street: "",
+  number: 0,
+  apartment: false,
+  comment: "",
   getUser: async (id: string) => {
     try {
       const res = await axios.get(`http://localhost:3001/users/${id}`);
       const user = await res.data;
+      console.log(user, "usuario");
 
       set((state) => ({
         ...state,
@@ -45,11 +46,11 @@ export const useUserStore = create<UserStoreState>((set) => ({
 
   createUser: async (user: object) => {
     try {
-      const res = await axios.post("http://localhost:3001/users", user);
+      const res = await axios.get("http://localhost:3001/users", user);
       const newUser = await res.data;
+      console.log(res);
 
       set((state) => ({
-        ...state,
         id: newUser.id,
         name: newUser.name,
         lastname: newUser.lastname,
