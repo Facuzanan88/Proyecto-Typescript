@@ -13,7 +13,7 @@ function App() {
     <ChakraProvider theme={theme}>
       <NavBar />
       <Routes>
-        <Route path="/" Component={LandingPage} />
+        <Route path="/" Component={Root} />
         <Route path="/registrarse" Component={Registro} />
         <Route path="*" Component={Error} />
       </Routes>
