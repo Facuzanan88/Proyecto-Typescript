@@ -4,13 +4,15 @@ import axios from "axios";
 import UserAtributtes from "../interfaces/user";
 
 interface UserStoreState extends UserAttributes {
-  getUser: (id: string) => Promise<any>;
+  users: UserAtributtes[];
+  getUsers: () => Promise<UserAttributes[]>;
   createUser: (user: object) => Promise<UserAtributtes>;
   userByMail: (email: string) => Promise<UserAtributtes> | null;
   modifyUser: (updateUser: object) => Promise<void>;
 }
 
 export const useUserStore = create<UserStoreState>((set) => ({
+  users: [],
   id: "",
   name: "",
   lastname: "",
@@ -20,27 +22,16 @@ export const useUserStore = create<UserStoreState>((set) => ({
   number: 0,
   apartment: false,
   comment: "",
-  getUser: async (id: string) => {
-    try {
-      const res = await axios.get(`http://localhost:3001/users/${id}`);
-      const user = await res.data;
-      console.log(user, "usuario");
 
-      set((state) => ({
-        ...state,
-        id: user.id,
-        name: user.given_name,
-        lastname: user.family_name,
-        email: user.email,
-        cel: user.cel,
-        street: user.street,
-        number: user.number,
-        apartment: user.apartment,
-        comment: user.comment,
-      }));
+  getUsers: async () => {
+    try {
+      const res = await axios.get("http://localhost:3001/users");
+      const users = await res.data;
+      set({ users });
+      return users;
     } catch (error) {
-      // Manejar el error, por ejemplo, mostrar un mensaje de error o registrarlo.
-      console.error("Error al obtener el usuario:", error);
+      console.error("Error al obtener los usuarios:", error);
+      throw error; // Lanzar el error para que pueda ser manejado en el componente
     }
   },
 

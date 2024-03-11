@@ -22,7 +22,7 @@ const Profile: React.FC<{}> = () => {
 
   const navigate = useNavigate();
 
-  const { getUser, userByMail } = useUserStore();
+  const { getUsers, userByMail } = useUserStore();
 
   useEffect(() => {
     if (user) {
