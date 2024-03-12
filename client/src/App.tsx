@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Profile from "./components/LoginButtons/Profile";
 import Registro from "./components/Registro/Registro";
 import LandingPage from "./components/LandingPage/LandingPage";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/registrarse" Component={Registro} />
         <Route path="*" Component={Error} />
       </Routes>
+      <Footer />
     </ChakraProvider>
   );
 }
