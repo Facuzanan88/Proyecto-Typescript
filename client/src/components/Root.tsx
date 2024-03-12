@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import UserAtributtes from "../interfaces/user";
 import Profile from "./LoginButtons/Profile";
 import { useUserStore } from "../store/userStore";
+import Cards from "../components/Cards/Cards";
 
 const Root: React.FC<{}> = () => {
   const [user, setUser] = useState<UserAtributtes | null>(null);
@@ -34,6 +35,7 @@ const Root: React.FC<{}> = () => {
 
         <Profile />
       </div>
+      <Cards />
     </>
   );
 };
