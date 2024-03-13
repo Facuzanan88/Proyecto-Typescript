@@ -6,9 +6,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
     id!: string;
     name!: string;
     photo!: string;
-    weight!: number;
+    price!: number;
     fat!: number;
     bone!: number;
+    description!: string;
+    stock!: boolean;
   }
 
   PigCuts.init(
@@ -27,7 +29,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      weight: {
+      price: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -38,6 +40,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
       bone: {
         type: DataTypes.FLOAT,
         allowNull: true,
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      stock: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
       },
     },
     {
