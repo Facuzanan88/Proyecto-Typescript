@@ -39,6 +39,7 @@ const Root: React.FC<{}> = () => {
       console.error("Error al obtener usuarios:", error);
     }
   };
+
   return (
     <>
       <div style={{ padding: "20px" }}>

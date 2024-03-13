@@ -9,11 +9,20 @@ import {
   Stack,
   Image,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useCowStore } from "../../store/cowStore";
 
 const IMAGE =
   "https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80";
 
 export default function ProductSimple() {
+  const cowStore = useCowStore(); // usando el hook directamente
+  const cow = cowStore.cowCuts;
+
+  useEffect(() => {
+    cowStore.getCows();
+  }, []);
+
   return (
     <Center py={12}>
       <Box
@@ -61,7 +70,7 @@ export default function ProductSimple() {
         </Box>
         <Stack pt={10} align={"center"}>
           <Text color={"gray.500"} fontSize={"sm"} textTransform={"uppercase"}>
-            Brand
+            {cow && cow.length !== 0 ? cow[0].name : "no existe ningun corte"}
           </Text>
           <Heading fontSize={"2xl"} fontFamily={"body"} fontWeight={500}>
             Nice Chair, pink
