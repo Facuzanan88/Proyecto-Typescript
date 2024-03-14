@@ -62,7 +62,13 @@ export default function CaptionCarousel() {
   ];
 
   return (
-    <Box height={"400px"} width={"80%"} overflow={"hidden"} m={"auto"}>
+    <Box
+      height={"400px"}
+      width={"80%"}
+      overflow={"hidden"}
+      m={"auto"}
+      position="relative"
+    >
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"
@@ -79,8 +85,8 @@ export default function CaptionCarousel() {
         aria-label="left-arrow"
         variant="ghost"
         position="absolute"
-        left={side}
-        top={top}
+        left={0}
+        top="50%"
         transform={"translate(0%, -50%)"}
         zIndex={2}
         onClick={() => slider?.slickPrev()}
@@ -92,8 +98,8 @@ export default function CaptionCarousel() {
         aria-label="right-arrow"
         variant="ghost"
         position="absolute"
-        right={side}
-        top={top}
+        right={0}
+        top="50%"
         transform={"translate(0%, -50%)"}
         zIndex={2}
         onClick={() => slider?.slickNext()}

@@ -2,6 +2,7 @@
 
 import {
   Box,
+  Image,
   Flex,
   Heading,
   Text,
@@ -10,6 +11,9 @@ import {
   Avatar,
   useColorModeValue,
 } from "@chakra-ui/react";
+
+import { Link } from "react-router-dom";
+import logo from "../../Assest/logo.jpg";
 
 interface Props {
   children: React.ReactNode;
@@ -103,46 +107,80 @@ const TestimonialAvatar = ({
 export default function WithSpeechBubbles() {
   return (
     <Box bg={useColorModeValue("gray.100", "gray.700")}>
-      <Container maxW={"3xl"} py={16} as={Stack} spacing={12}>
+      <Container maxW={"full"} py={16}>
         <Stack spacing={0} align={"center"}>
           <Heading>CORTES DE CARNE</Heading>
-          <Text>Trabajamos con carne de la region de la mas Alta Calidad</Text>
+          <Text>Trabajamos con carne de la región de la más alta calidad</Text>
         </Stack>
-        <Stack
-          direction={{ base: "column", md: "row" }}
-          spacing={{ base: 10, md: 4, lg: 10 }}
-        >
-          <TestimonialContent>
-            <TestimonialHeading>
-              <Text textAlign={"center"}>CORTES VACUNOS</Text>
-            </TestimonialHeading>
-            <TestimonialText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-              neque sed imperdiet nibh lectus feugiat nunc sem.
-            </TestimonialText>
-          </TestimonialContent>
-
-          <TestimonialContent>
-            <TestimonialHeading>
-              <Text textAlign={"center"}>CORTES DE CERDO</Text>
-            </TestimonialHeading>
-
-            <TestimonialText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-              neque sed imperdiet nibh lectus feugiat nunc sem.
-            </TestimonialText>
-          </TestimonialContent>
-
-          <TestimonialContent>
-            <TestimonialHeading>
-              <Text textAlign={"center"}>CORTES DE CERDO</Text>
-            </TestimonialHeading>
-            <TestimonialText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-              neque sed imperdiet nibh lectus feugiat nunc sem.
-            </TestimonialText>
-          </TestimonialContent>
-        </Stack>
+        <Flex mt={12} justifyContent={"space-between"} mx={"52"}>
+          {" "}
+          {/* Ajustando el margen horizontal */}
+          <Link to="cow" style={{ textDecoration: "none" }}>
+            <Box flex={1} mx={2} maxW="264.65px">
+              <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
+                <Box p={4}>
+                  <Heading as="h3" size="md" textAlign="center" mb={4}>
+                    CORTES VACUNOS
+                  </Heading>
+                  <Image
+                    src={logo}
+                    alt="Cortes Vacunos"
+                    paddingLeft={8}
+                    paddingRight={8}
+                    paddingBottom={6}
+                  />
+                  <Text textAlign="center">
+                    Cortes frescos de los mejores frigoríficos de la zona
+                  </Text>
+                </Box>
+              </Box>
+            </Box>
+          </Link>
+          <Link to="/cortes-de-cerdo" style={{ textDecoration: "none" }}>
+            <Box flex={1} mx={2} maxW="264.65px">
+              <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
+                <Box p={4}>
+                  <Heading as="h3" size="md" textAlign="center" mb={4}>
+                    CORTES DE CERDO
+                  </Heading>
+                  <Image
+                    src={logo}
+                    alt="Cortes de Cerdo"
+                    paddingLeft={8}
+                    paddingRight={8}
+                    paddingBottom={6}
+                  />
+                  <Text textAlign="center">
+                    Cortes frescos de los mejores frigoríficos de la zona
+                    sumados a diferentes cortes de productores de la zona
+                  </Text>
+                </Box>
+              </Box>
+            </Box>
+          </Link>
+          <Link to="/cortes-de-pollo" style={{ textDecoration: "none" }}>
+            <Box flex={1} mx={2} maxW="264.65px">
+              <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
+                <Box p={4}>
+                  <Heading as="h3" size="md" textAlign="center" mb={4}>
+                    CORTES DE POLLO
+                  </Heading>
+                  <Image
+                    src={logo}
+                    alt="Cortes de Pollo"
+                    paddingLeft={8}
+                    paddingRight={8}
+                    paddingBottom={6}
+                  />
+                  <Text textAlign="center">
+                    Todo proveniente de criaderos de pollo de la zona alimentado
+                    a base de maíz
+                  </Text>
+                </Box>
+              </Box>
+            </Box>
+          </Link>
+        </Flex>
       </Container>
     </Box>
   );
