@@ -16,9 +16,13 @@ import {
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { ReactNode } from "react";
 
+import { usePromotialMailStore } from "../../store/promotialMailStore";
+
 import logo from "../../Assest/logo.jpg";
 
 import { BiMailSend } from "react-icons/bi";
+
+import { useState } from "react";
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
@@ -61,6 +65,26 @@ const SocialButton = ({
 };
 
 export default function SmallWithLogoLeft() {
+  const [email, setEmail] = useState("");
+  const promotialMailStore = usePromotialMailStore();
+
+  // Controlador de eventos para manejar los cambios en el input
+  const handleInputChange = (event: any) => {
+    setEmail(event.target.value);
+  };
+
+  const newPromotialMail = {
+    email: email,
+    login: false,
+    delete: false,
+  };
+
+  const handleSubmit = () => {
+    promotialMailStore.createPromotialMail(newPromotialMail);
+    console.log("Correo electrónico enviado:", newPromotialMail);
+    setEmail("");
+  };
+
   return (
     <Box
       bg={useColorModeValue("gray.50", "gray.900")}
@@ -108,6 +132,8 @@ export default function SmallWithLogoLeft() {
                 bg: "whiteAlpha.300",
               }}
               ml={24}
+              value={email}
+              onChange={handleInputChange}
             />
             <IconButton
               bg={useColorModeValue("red.100", "red.500")}
@@ -117,6 +143,7 @@ export default function SmallWithLogoLeft() {
               }}
               aria-label="Subscribe"
               icon={<BiMailSend />}
+              onClick={handleSubmit}
             />
           </Stack>
         </Stack>

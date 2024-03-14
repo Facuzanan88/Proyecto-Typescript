@@ -4,6 +4,7 @@ import { getUsers, userByMail } from "../../services/usersService";
 import { useUserStore } from "../../store/userStore";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import Carousel from "../Corousel/Carousel";
 
 const LandingPage: React.FC<{}> = () => {
   const userByStore = useUserStore((state) => ({
@@ -25,6 +26,7 @@ const LandingPage: React.FC<{}> = () => {
   return (
     <>
       <div>
+        <Carousel />
         <h1>FACUNDO</h1>
         <button onClick={handleClick}>Usuarios</button>
         <button onClick={handleGet}>Mostrar</button>
