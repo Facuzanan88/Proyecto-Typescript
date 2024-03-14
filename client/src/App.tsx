@@ -8,6 +8,7 @@ import Profile from "./components/LoginButtons/Profile";
 import Registro from "./components/Registro/Registro";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Footer from "./components/Footer/Footer";
+import CardDetail from "./components/CardDetail/CardDetail";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" Component={Root} />
+        <Route path="/:id" Component={CardDetail} />
         <Route path="/registrarse" Component={Registro} />
         <Route path="*" Component={Error} />
       </Routes>

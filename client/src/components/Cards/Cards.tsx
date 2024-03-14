@@ -8,12 +8,10 @@ import {
   Text,
   Stack,
   Image,
+  Link,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useCowStore } from "../../store/cowStore";
-
-const IMAGE =
-  "https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80";
 
 export default function ProductSimple() {
   const cowStore = useCowStore(); // usando el hook directamente
@@ -21,7 +19,7 @@ export default function ProductSimple() {
 
   useEffect(() => {
     cowStore.getCows();
-  }, []);
+  }, [cowStore]);
 
   return (
     <Center py={12}>
@@ -66,14 +64,16 @@ export default function ProductSimple() {
                   },
                 }}
               >
-                <Image
-                  rounded={"lg"}
-                  height={230}
-                  width={282}
-                  objectFit={"cover"}
-                  src={cow.photo} // Usa item.IMAGE en lugar de IMAGE
-                  alt="#"
-                />
+                <Link href={`/${cow.id}`}>
+                  <Image
+                    rounded={"lg"}
+                    height={230}
+                    width={282}
+                    objectFit={"cover"}
+                    src={cow.photo} // Usa item.IMAGE en lugar de IMAGE
+                    alt="#"
+                  />
+                </Link>
               </Box>
               <Stack pt={10} align={"center"}>
                 <Text
