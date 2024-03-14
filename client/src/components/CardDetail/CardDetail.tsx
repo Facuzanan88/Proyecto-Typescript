@@ -17,10 +17,11 @@ import {
   VisuallyHidden,
   List,
   ListItem,
+  Input,
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 import { useCowStore } from "../../store/cowStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
@@ -37,13 +38,21 @@ const CardDetail: React.FC<{}> = () => {
     stock: cowStore.stock,
   };
 
-  const idCow = "1b1c46c6-5d80-4536-8751-cb748fe1abb7";
+  const id = useParams();
+  const idCow = id.id;
   console.log(idCow);
 
   useEffect(() => {
-    const cow = cowStore.cowById(idCow);
-    console.log(cow);
+    cowStore.cowById(idCow);
   }, []);
+
+  const [quantity, setQuantity] = useState(0);
+  const cowPrice = cow.price;
+  const total = cowPrice * quantity;
+
+  const handleQuantityChange = (event: any) => {
+    setQuantity(event.target.value);
+  };
 
   return (
     <Container maxW={"7xl"}>
@@ -64,7 +73,14 @@ const CardDetail: React.FC<{}> = () => {
           />
         </Flex>
         <Stack>
-          <Box as={"header"}>
+          <Box
+            as={"header"}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            pt={"8"}
+            pb={"12"}
+          >
             <Heading
               lineHeight={1.1}
               fontWeight={600}
@@ -72,13 +88,6 @@ const CardDetail: React.FC<{}> = () => {
             >
               {cow.name}
             </Heading>
-            <Text
-              color={useColorModeValue("gray.900", "gray.400")}
-              fontWeight={300}
-              fontSize={"2xl"}
-            >
-              ${cow.price}
-            </Text>
           </Box>
 
           <Stack
@@ -91,12 +100,7 @@ const CardDetail: React.FC<{}> = () => {
             }
           >
             <VStack spacing={{ base: 4, sm: 6 }}>
-              <Text fontSize={"lg"}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
-                aliquid amet at delectus doloribus dolorum expedita hic, ipsum
-                maxime modi nam officiis porro, quae, quisquam quos
-                reprehenderit velit? Natus, totam.
-              </Text>
+              <Text fontSize={"lg"}>{cow.description}</Text>
             </VStack>
 
             <Box>
@@ -106,6 +110,7 @@ const CardDetail: React.FC<{}> = () => {
                 fontWeight={"500"}
                 textTransform={"uppercase"}
                 mb={"4"}
+                pt={"4"}
               >
                 Product Details
               </Text>
@@ -113,33 +118,51 @@ const CardDetail: React.FC<{}> = () => {
               <List spacing={2}>
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                    Between lugs:
+                    Precio:
                   </Text>{" "}
-                  20 mm
+                  ${cow.price}
                 </ListItem>
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                    Bracelet:
+                    kg de Hueso:
                   </Text>{" "}
-                  leather strap
+                  {cow.bone}%
                 </ListItem>
                 <ListItem>
                   <Text as={"span"} fontWeight={"bold"}>
-                    Case:
+                    kg de Grasa:
                   </Text>{" "}
-                  Steel
+                  {cow.fat}%
                 </ListItem>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    Case diameter:
-                  </Text>{" "}
-                  42 mm
-                </ListItem>
-                <ListItem>
-                  <Text as={"span"} fontWeight={"bold"}>
-                    Water resistance:
-                  </Text>{" "}
-                  5 bar (50 metres / 167 feet){" "}
+                <ListItem pt={2}>
+                  <Box display={"center"} justifyContent={"center"}>
+                    <Text
+                      fontSize="md"
+                      mr={4}
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
+                      PESO (KG)
+                    </Text>
+                    <Input
+                      maxW={150}
+                      textAlign={"center"}
+                      placeholder={"Ingrese el peso"}
+                      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
+                      border={0}
+                      _focus={{
+                        bg: "whiteAlpha.300",
+                      }}
+                      value={quantity}
+                      onChange={handleQuantityChange}
+                    />
+                  </Box>
+                  <Box display={"flex"} justifyContent={"center"}>
+                    <Text>TOTAL:</Text>
+                    <Text fontSize="md" ml={4}>
+                      ${total}
+                    </Text>
+                  </Box>
                 </ListItem>
               </List>
             </Box>
@@ -154,7 +177,7 @@ const CardDetail: React.FC<{}> = () => {
       >
         <Button
           rounded={"none"}
-          /*     mt={8} */
+          width={"400px"}
           py={"5"}
           bg={useColorModeValue("gray.900", "gray.50")}
           color={useColorModeValue("white", "gray.900")}
@@ -164,11 +187,13 @@ const CardDetail: React.FC<{}> = () => {
             boxShadow: "lg",
           }}
         >
-          Add to cart
+          <Text mr={4}>Agrego al Carrito</Text>
+          <MdLocalShipping />
         </Button>
-
-        <MdLocalShipping />
-        <Text>2-3 business days delivery</Text>
+        <Text fontSize={"xs"} maxW={300} textAlign={"center"}>
+          El peso del producto recibido puede variar brevemente del ingresado lo
+          que impacta directamente en el precio, sin ser cambios significativos
+        </Text>
       </Stack>
     </Container>
   );
