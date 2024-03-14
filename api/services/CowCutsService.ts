@@ -20,3 +20,8 @@ export const createCowCut = async (cutData: any): Promise<CutsAtributtes> => {
   });
   return result;
 };
+
+export const cowById = async (id: string): Promise<CutsAtributtes> => {
+  let result = await db.CowCuts.findByPk(id);
+  return result;
+};

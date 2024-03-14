@@ -22,3 +22,16 @@ export async function postCowCut(req: Request, res: Response): Promise<void> {
     res.status(500).send(error);
   }
 }
+
+export async function cowById(req: Request, res: Response): Promise<void> {
+  const idCow = req.params.id;
+  try {
+    let result = await CowcutsService.cowById(idCow);
+    if (result) {
+      res.status(200).json(result);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(`The id ${idCow} was not found`);
+  }
+}

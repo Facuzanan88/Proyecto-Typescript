@@ -46,6 +46,5 @@ export const getAUser = async (id: string): Promise<UserAtributtes> => {
 
 export const getUserByMail = async (email: string): Promise<UserAtributtes> => {
   let result = await db.User.findOne({ where: { email: email } });
-  console.log(result);
   return result;
 };
