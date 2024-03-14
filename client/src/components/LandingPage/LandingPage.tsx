@@ -5,6 +5,8 @@ import { useUserStore } from "../../store/userStore";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Carousel from "../Corousel/Carousel";
+import Features from "../../components/Features/Features";
+import PrincipalCategory from "../PrincipalCategory/PrincipalCategory";
 
 const LandingPage: React.FC<{}> = () => {
   const userByStore = useUserStore((state) => ({
@@ -27,6 +29,8 @@ const LandingPage: React.FC<{}> = () => {
     <>
       <div>
         <Carousel />
+        <Features />
+        <PrincipalCategory />
         <h1>FACUNDO</h1>
         <button onClick={handleClick}>Usuarios</button>
         <button onClick={handleGet}>Mostrar</button>
