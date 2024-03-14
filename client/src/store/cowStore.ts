@@ -4,6 +4,7 @@ import axios from "axios";
 import CutsAtributtes from "../interfaces/cuts";
 
 interface CutStoreState extends CutsAtributtes {
+  cowById(idCow: any): unknown;
   cowCuts: cutsAttributes[] | null;
   getCows: () => Promise<CutsAtributtes[] | null>;
   createCows: (cow: object) => Promise<CutsAtributtes>;
@@ -36,9 +37,8 @@ export const useCowStore = create<CutStoreState>((set) => ({
 
   createCows: async (cow: Object) => {
     try {
-      const res = await axios.get("http://localhost:3001/cow", cow);
+      const res = await axios.post("http://localhost:3001/cow", cow);
       const newCow = await res.data;
-      console.log(newCow);
 
       set((state) => ({
         id: newCow.id,
@@ -54,6 +54,27 @@ export const useCowStore = create<CutStoreState>((set) => ({
     } catch (error) {
       // Manejar el error, por ejemplo, mostrar un mensaje de error o registrarlo.
       console.error("Error al crear un corte de vaca nuevo:", error);
+    }
+  },
+
+  cowById: async (id: string) => {
+    try {
+      const res = await axios.get(`http://localhost:3001/cow/${id}`);
+      const cowCut = await res.data;
+
+      set((state) => ({
+        id: cowCut.id,
+        name: cowCut.name,
+        photo: cowCut.photo,
+        price: cowCut.price,
+        fat: cowCut.fat,
+        bone: cowCut.bone,
+        description: cowCut.description,
+        stock: cowCut.stock,
+      }));
+      return cowCut;
+    } catch (error) {
+      console.error("Error al obtener el corte de carne por Id", error);
     }
   },
 }));

@@ -39,7 +39,6 @@ export const useUserStore = create<UserStoreState>((set) => ({
     try {
       const res = await axios.get("http://localhost:3001/users", user);
       const newUser = await res.data;
-      console.log(res);
 
       set((state) => ({
         id: newUser.id,
