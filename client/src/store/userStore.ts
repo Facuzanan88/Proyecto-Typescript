@@ -16,6 +16,7 @@ export const useUserStore = create<UserStoreState>((set) => ({
   id: "",
   name: "",
   lastname: "",
+  age: 0,
   email: "",
   cel: 0,
   street: "",
@@ -37,13 +38,14 @@ export const useUserStore = create<UserStoreState>((set) => ({
 
   createUser: async (user: object) => {
     try {
-      const res = await axios.get("http://localhost:3001/users", user);
+      const res = await axios.post("http://localhost:3001/users", user);
       const newUser = await res.data;
 
       set((state) => ({
         id: newUser.id,
         name: newUser.name,
         lastname: newUser.lastname,
+        age: newUser.age,
         email: newUser.email,
         cel: newUser.cel,
         street: newUser.street,
@@ -67,6 +69,7 @@ export const useUserStore = create<UserStoreState>((set) => ({
         id: user.id,
         name: user.name,
         lastname: user.lastname,
+        age: user.age,
         email: user.email,
         cel: user.cel,
         street: user.street,
@@ -90,6 +93,7 @@ export const useUserStore = create<UserStoreState>((set) => ({
         id: newUser.id,
         name: newUser.name,
         lastname: newUser.lastname,
+        age: newUser.age,
         email: newUser.email,
         cel: newUser.cel,
         street: newUser.street,

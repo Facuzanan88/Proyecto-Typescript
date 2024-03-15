@@ -1,7 +1,8 @@
 export default interface UserAtributtes {
-  id: string | undefined;
+  id?: string | undefined;
   name: string | undefined;
   lastname: string | undefined;
+  age: number | undefined;
   email: string | undefined;
   cel: number | undefined;
   street: string | undefined;
