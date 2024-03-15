@@ -41,8 +41,8 @@ export async function postUser(req: Request, res: Response): Promise<void> {
     let result = await userService.createUser(user);
     res.status(200).json(result);
   } catch (error) {
-    console.log(error);
-    res.status(500).send("We could not create the user");
+    console.log(error, "we could not create user");
+    res.status(500).json(error);
   }
 }
 

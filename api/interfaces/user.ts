@@ -1,12 +1,13 @@
 export default interface UserAtributtes {
-  id: string;
-  name: string;
-  lastname: string;
-  email: string;
-  cel: number;
-  street: string;
-  number: number;
-  apartment: boolean;
-  comment: string;
-  deleted: boolean;
+  id: string | undefined;
+  name: string | undefined;
+  lastname: string | undefined;
+  age: number | undefined;
+  email: string | undefined;
+  cel: number | undefined;
+  street: string | undefined;
+  number: number | undefined;
+  apartment?: boolean | undefined;
+  comment?: string | undefined;
+  deleted?: boolean | undefined;
 }

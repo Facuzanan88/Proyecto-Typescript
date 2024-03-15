@@ -3,6 +3,7 @@ import UserAtributtes from "../interfaces/user";
 
 module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model<UserAtributtes> implements UserAtributtes {
+    age: number | undefined;
     id!: string;
     name!: string;
     lastname!: string;
@@ -31,6 +32,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      age: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -42,11 +47,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       street: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       number: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
       apartment: {
         type: DataTypes.BOOLEAN,
