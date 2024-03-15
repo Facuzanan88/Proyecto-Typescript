@@ -9,6 +9,8 @@ import Registro from "./components/Registro/Registro";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Footer from "./components/Footer/Footer";
 import CardDetail from "./components/CardDetail/CardDetail";
+import Sucursales from "./components/Sucursales/Sucursales";
+import QuienesSomos from "./components/QuienesSomos/QuienesSomos";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/:id" Component={CardDetail} />
         <Route path="/registrarse" Component={Registro} />
         <Route path="*" Component={Error} />
+        <Route path="/sucursales" Component={Sucursales} />
+        <Route path="/quienessomos" Component={QuienesSomos} />
       </Routes>
       <Footer />
     </ChakraProvider>
