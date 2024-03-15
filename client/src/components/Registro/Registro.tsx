@@ -15,11 +15,13 @@ import {
 
 const Registro: React.FC<{}> = () => {
   const { isAuthenticated, user } = useAuth0();
+  const UserStore = useUserStore();
 
   const userByStore = useUserStore((state) => ({
     id: state.id,
     name: state.name,
     lastname: state.lastname,
+    age: state.age,
     email: state.email,
     cel: state.cel,
     street: state.street,
@@ -31,20 +33,20 @@ const Registro: React.FC<{}> = () => {
   const [apartment, setApartment] = useState(userByStore?.apartment || false);
 
   const [usuario, setUsuario] = useState<UserAtributtes>({
-    id: userByStore.id,
-    name: userByStore?.name,
-    lastname: userByStore.lastname,
-    email: userByStore.email,
-    cel: userByStore.cel,
-    street: userByStore.street,
-    number: userByStore.number,
-    apartment: userByStore.apartment,
-    comment: userByStore.comment,
+    name: "",
+    lastname: "",
+    age: 0,
+    email: "",
+    cel: 0,
+    street: "",
+    number: 0,
+    apartment: false,
+    comment: "",
   });
 
   const navigate = useNavigate();
 
-  const { userByMail, /* createUser, */ modifyUser } = useUserStore();
+  const { userByMail, createUser, modifyUser } = useUserStore();
 
   useEffect(() => {
     if (user) {
@@ -89,10 +91,33 @@ const Registro: React.FC<{}> = () => {
     }
   };
 
+  /*   const obj = {
+    name: "asdasda",
+    lastname: "asdasdasdas",
+    age: 28,
+    email: "asd12d@gmail.com",
+    cel: 12343,
+    street: "laprida",
+    number: 3211,
+    apartment: true,
+  }; */
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    /*    if (typeof usuario.age === "string") {
+      usuario.age = parseFloat(usuario.age);
+    }
+    if (typeof usuario.cel === "string") {
+      usuario.cel = parseFloat(usuario.cel);
+    }
+    if (typeof usuario.number === "string") {
+      usuario.number = parseFloat(usuario.number);
+    } */
+    console.log(usuario);
+    /* console.log(obj); */
     usuario.apartment = apartment;
-    modifyUser(usuario);
+    UserStore.createUser(usuario);
+    /*   UserStore.createUser(obj); */
     navigate("/");
   };
 
@@ -119,6 +144,16 @@ const Registro: React.FC<{}> = () => {
           />
         </FormControl>
 
+        <FormControl id="age" w="50%">
+          <FormLabel>Edad:</FormLabel>
+          <Input
+            type="number"
+            name="age"
+            value={usuario.age ? usuario.age : userByStore.age}
+            onChange={handleInputChange}
+          />
+        </FormControl>
+
         <FormControl id="email" w="50%">
           <FormLabel>E-Mail</FormLabel>
           <Input
@@ -130,12 +165,13 @@ const Registro: React.FC<{}> = () => {
         </FormControl>
 
         <FormControl id="cel" w="50%">
-          <FormLabel>Celular</FormLabel>
+          <FormLabel>Celular:s</FormLabel>
           <Input
-            type="tel"
+            type="number"
             name="cel"
             value={usuario.cel ? usuario.cel : userByStore.cel}
             onChange={handleInputChange}
+            required
           />
         </FormControl>
 
