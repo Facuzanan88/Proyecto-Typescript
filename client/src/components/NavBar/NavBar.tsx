@@ -287,16 +287,20 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "/franchise",
   },
   {
-    label: "Nosotros",
-    href: "/about",
+    label: "Quienes Somos",
+    href: "/quienessomos",
   },
   {
     label: "Formulario",
-    href: "/form",
+    href: "/registrarse",
   },
   {
     label: "Perfil",
     href: "/profile",
+  },
+  {
+    label: "Contacto",
+    href: "/contacto",
   },
 ];
 

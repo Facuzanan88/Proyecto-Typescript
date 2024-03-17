@@ -11,6 +11,7 @@ import Footer from "./components/Footer/Footer";
 import CardDetail from "./components/CardDetail/CardDetail";
 import Sucursales from "./components/Sucursales/Sucursales";
 import QuienesSomos from "./components/QuienesSomos/QuienesSomos";
+import Contacto from "./components/Contacto/Contacto";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="*" Component={Error} />
         <Route path="/sucursales" Component={Sucursales} />
         <Route path="/quienessomos" Component={QuienesSomos} />
+        <Route path="/contacto" Component={Contacto} />
       </Routes>
       <Footer />
     </ChakraProvider>
