@@ -56,7 +56,7 @@ export const useUserStore = create<UserStoreState>((set) => ({
       return newUser;
     } catch (error) {
       // Manejar el error, por ejemplo, mostrar un mensaje de error o registrarlo.
-      console.error("Error al obtener el usuario:", error);
+      console.error("Error al crear el usuario:", error);
     }
   },
   userByMail: async (email: string) => {

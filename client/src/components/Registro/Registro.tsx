@@ -12,6 +12,7 @@ import {
   Button,
   Checkbox,
 } from "@chakra-ui/react";
+import Swal from "sweetalert2";
 
 const Registro: React.FC<{}> = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -91,20 +92,9 @@ const Registro: React.FC<{}> = () => {
     }
   };
 
-  /*   const obj = {
-    name: "asdasda",
-    lastname: "asdasdasdas",
-    age: 28,
-    email: "asd12d@gmail.com",
-    cel: 12343,
-    street: "laprida",
-    number: 3211,
-    apartment: true,
-  }; */
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    /*    if (typeof usuario.age === "string") {
+    if (typeof usuario.age === "string") {
       usuario.age = parseFloat(usuario.age);
     }
     if (typeof usuario.cel === "string") {
@@ -112,13 +102,26 @@ const Registro: React.FC<{}> = () => {
     }
     if (typeof usuario.number === "string") {
       usuario.number = parseFloat(usuario.number);
-    } */
-    console.log(usuario);
-    /* console.log(obj); */
+    }
     usuario.apartment = apartment;
-    UserStore.createUser(usuario);
-    /*   UserStore.createUser(obj); */
-    navigate("/");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        UserStore.createUser(usuario);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (
