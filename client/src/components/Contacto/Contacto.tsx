@@ -22,7 +22,8 @@ import {
 
 import { Link } from "react-router-dom";
 import logo from "../../Assest/logo.jpg";
-import ReCAPTCHA from "../ReCAPTCHA/ReCAPTCHA";
+import React, { useState, useRef } from "react";
+import ReCAPTCHA, { ReCAPTCHA as ReCAPTCHAType } from "react-google-recaptcha";
 
 function ContactSection() {
   return (
@@ -56,6 +57,31 @@ function ContactSection() {
 }
 
 function App() {
+  const [captchaValido, setCaptchaValido] = useState(true);
+  const [usuarioValido, setUsuarioValido] = useState(false);
+
+  const captcha = useRef<ReCAPTCHAType | null>(null); // Definir el tipo explícitamente
+
+  const onChange = () => {
+    if (captcha.current?.getValue()) {
+      console.log("el usuario no es un robot", captcha.current.getValue());
+      setCaptchaValido(true);
+    }
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (captcha.current?.getValue()) {
+      console.log("el usuario no es un robot", captcha.current.getValue());
+      setUsuarioValido(true);
+      setCaptchaValido(true);
+    } else {
+      console.log("primero debes completar el CAPTCHA");
+      setUsuarioValido(false);
+      setCaptchaValido(false);
+    }
+  };
+
   return (
     <ChakraProvider theme={theme}>
       <Flex justifyContent={"space-between"} align={"center"} p={4}>
@@ -81,29 +107,47 @@ function App() {
           <Text fontSize={"lg"} fontWeight={"bold"}>
             Envía tus sugerencias o consultas:
           </Text>
-          <form>
-            <VStack spacing={4} align="stretch" alignItems="center">
-              <FormControl id="name">
-                <FormLabel>Nombre</FormLabel>
-                <Input type="text" name="name" />
-              </FormControl>
+          {!usuarioValido && (
+            <form onSubmit={handleSubmit}>
+              <VStack spacing={4} align="stretch" alignItems="center">
+                <FormControl id="name">
+                  <FormLabel>Nombre</FormLabel>
+                  <Input type="text" name="name" />
+                </FormControl>
 
-              <FormControl id="lastname">
-                <FormLabel>Apellido</FormLabel>
-                <Input type="text" name="lastname" />
-              </FormControl>
+                <FormControl id="lastname">
+                  <FormLabel>Apellido</FormLabel>
+                  <Input type="text" name="lastname" />
+                </FormControl>
 
-              <FormControl id="age">
-                <FormLabel>Edad:</FormLabel>
-                <Input type="number" name="age" />
-              </FormControl>
-
-              <ReCAPTCHA />
-              <Grid pb="4">
-                <Button type="submit">Guardar</Button>
-              </Grid>
-            </VStack>
-          </form>
+                <FormControl id="age">
+                  <FormLabel>Edad:</FormLabel>
+                  <Input type="number" name="age" />
+                </FormControl>
+                <Grid>
+                  <ReCAPTCHA
+                    ref={captcha}
+                    sitekey="6Lf_ZJ0pAAAAAFZUFexbCLg9vd1Zi7o5d80rUQ5-"
+                    onChange={onChange}
+                    /* onErrored={() => console.log("Error al cargar reCAPTCHA")} */
+                  />
+                  {captchaValido === false && (
+                    <Text>Por favor completa el CAPTCHA</Text>
+                  )}
+                </Grid>
+                <Grid pb="4">
+                  <Button type="submit">Guardar</Button>
+                </Grid>
+              </VStack>
+            </form>
+          )}
+          {usuarioValido && (
+            <Stack>
+              <Text fontSize={"lg"} fontWeight={"bold"}>
+                GRACIAS POR SUS COMENTARIOS
+              </Text>
+            </Stack>
+          )}
         </Stack>
       </Flex>
     </ChakraProvider>

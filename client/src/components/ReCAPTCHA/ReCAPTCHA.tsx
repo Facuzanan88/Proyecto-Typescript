@@ -1,24 +1,27 @@
-import { Stack } from "@chakra-ui/react";
-import React, { useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import React, { useState, useRef } from "react";
+import ReCAPTCHA, { ReCAPTCHA as ReCAPTCHAType } from "react-google-recaptcha";
 
 function ContactForm() {
-  const [isVerified, setIsVerified] = useState(false);
+  const [captchaValido, setCaptchaValido] = useState(null);
+  const [usuarioValido, setUsuarioValido] = useState(false);
 
-  // Manejar la verificación de reCAPTCHA
+  const captcha = useRef<ReCAPTCHAType | null>(null); // Definir el tipo explícitamente
+
   const onChange = () => {
-    console.log("Se realizo un cambio");
-    setIsVerified(true);
+    if (captcha.current?.getValue()) {
+      console.log("el usuario no es un robot");
+    }
   };
 
   return (
-    <Stack>
+    <div>
       <ReCAPTCHA
+        ref={captcha}
         sitekey="6Lf_ZJ0pAAAAAFZUFexbCLg9vd1Zi7o5d80rUQ5-"
         onChange={onChange}
-        onErrored={() => console.log("Error al cargar reCAPTCHA")}
+        /* onErrored={() => console.log("Error al cargar reCAPTCHA")} */
       />
-    </Stack>
+    </div>
   );
 }
 
