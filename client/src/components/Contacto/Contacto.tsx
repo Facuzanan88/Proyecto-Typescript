@@ -18,6 +18,7 @@ import {
   VStack,
   ChakraProvider,
   theme,
+  Textarea,
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
@@ -31,8 +32,9 @@ function ContactSection() {
       spacing={4}
       maxH={"full"}
       color={useColorModeValue("black", "white")}
+      marginLeft={28}
     >
-      <Flex justify="space-between" mx={20}>
+      <Flex justify="center" margin={"auto"}>
         <Stack>
           <Text fontSize={"lg"} fontWeight={"bold"}>
             Contactos:
@@ -84,7 +86,36 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <Flex justifyContent={"space-between"} align={"center"} p={4}>
+      <Stack
+        spacing={0}
+        align={"center"}
+        maxH={"full"}
+        bg={useColorModeValue("white", "black")}
+        color={useColorModeValue("black", "white")}
+      >
+        <Text
+          bg={useColorModeValue("white", "black")}
+          color={useColorModeValue("black", "white")}
+          maxH={"full"}
+          fontSize={"xs"}
+        >
+          LOS PEDIDOS SE ENTREGAN AL OTRO DÍA DE REALIZADA LA COMPRA. NO HAY
+          ENTREGAS LOS DOMINGOS.
+        </Text>
+      </Stack>
+
+      <Flex justifyContent={"center"} alignItems={"center"}>
+        <Image
+          rounded={"md"}
+          alt={"product image"}
+          src="https://www.on24.com.ar/wp-content/uploads/2021/03/Ruralista.gif"
+          fit={"cover"}
+          align={"center"}
+          w={"full"}
+          h={{ base: "100%", sm: "200px", lg: "300px" }}
+        />
+      </Flex>
+      <Flex justifyContent={"space-between"} align={"top"} marginTop={4} p={6}>
         {/* Contactos y redes sociales */}
         <Stack
           spacing={4}
@@ -102,7 +133,9 @@ function App() {
           align={"center"}
           maxH={"full"}
           color={useColorModeValue("black", "white")}
-          width="60%"
+          width="50%"
+          marginRight={14}
+          marginTop={16}
         >
           <Text fontSize={"lg"} fontWeight={"bold"}>
             Envía tus sugerencias o consultas:
@@ -115,15 +148,21 @@ function App() {
                   <Input type="text" name="name" />
                 </FormControl>
 
-                <FormControl id="lastname">
-                  <FormLabel>Apellido</FormLabel>
-                  <Input type="text" name="lastname" />
+                <FormControl id="email">
+                  <FormLabel>Correo Electrónico</FormLabel>
+                  <Input type="email" name="email" />
                 </FormControl>
 
-                <FormControl id="age">
-                  <FormLabel>Edad:</FormLabel>
-                  <Input type="number" name="age" />
+                <FormControl id="phone">
+                  <FormLabel>Teléfono (Opcional)</FormLabel>
+                  <Input type="tel" name="phone" />
                 </FormControl>
+
+                <FormControl id="message">
+                  <FormLabel>Mensaje</FormLabel>
+                  <Textarea name="message" />
+                </FormControl>
+
                 <Grid>
                   <ReCAPTCHA
                     ref={captcha}
