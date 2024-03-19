@@ -22,6 +22,7 @@ import {
 
 import { Link } from "react-router-dom";
 import logo from "../../Assest/logo.jpg";
+import ReCAPTCHA from "../ReCAPTCHA/ReCAPTCHA";
 
 function ContactSection() {
   return (
@@ -97,6 +98,7 @@ function App() {
                 <Input type="number" name="age" />
               </FormControl>
 
+              <ReCAPTCHA />
               <Grid pb="4">
                 <Button type="submit">Guardar</Button>
               </Grid>
