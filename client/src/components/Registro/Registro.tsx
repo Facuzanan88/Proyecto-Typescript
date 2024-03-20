@@ -119,7 +119,7 @@ const Registro: React.FC<{}> = () => {
     usuario.apartment = apartment;
 
     if (captcha.current?.getValue()) {
-      console.log("el usuario no es un robot", captcha.current.getValue());
+      console.log("el usuario no es un robot");
       setUsuarioValido(true);
       setCaptchaValido(true);
       Swal.fire({
