@@ -283,14 +283,6 @@ const NAV_ITEMS: Array<NavItem> = [
     ],
   },
   {
-    label: "Franquicia",
-    href: "/franchise",
-  },
-  {
-    label: "Quienes Somos",
-    href: "/quienessomos",
-  },
-  {
     label: "Formulario",
     href: "/registrarse",
   },
@@ -301,6 +293,14 @@ const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Contacto",
     href: "/contacto",
+  },
+  {
+    label: "Quienes Somos",
+    href: "/quienessomos",
+  },
+  {
+    label: "Sucursales",
+    href: "/sucursales",
   },
 ];
 
