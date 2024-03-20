@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useUserStore } from "../../store/userStore";
 import { useNavigate } from "react-router-dom";
 import UserAtributtes from "../../interfaces/user";
@@ -13,10 +13,13 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import Swal from "sweetalert2";
+import ReCAPTCHA, { ReCAPTCHA as ReCAPTCHAType } from "react-google-recaptcha";
 
 const Registro: React.FC<{}> = () => {
   const { isAuthenticated, user } = useAuth0();
-  const UserStore = useUserStore();
+
+  const [captchaValido, setCaptchaValido] = useState(true);
+  const [usuarioValido, setUsuarioValido] = useState(false);
 
   const userByStore = useUserStore((state) => ({
     id: state.id,
@@ -47,14 +50,15 @@ const Registro: React.FC<{}> = () => {
 
   const navigate = useNavigate();
 
-  const { userByMail, createUser, modifyUser } = useUserStore();
+  const UserStore = useUserStore();
+
+  const captcha = useRef<ReCAPTCHAType | null>(null); // Definir el tipo explícitamente
 
   useEffect(() => {
     if (user) {
       if (user.email) {
-        const usuarioPromise: Promise<UserAtributtes> | null = userByMail(
-          user.email
-        );
+        const usuarioPromise: Promise<UserAtributtes> | null =
+          UserStore.userByMail(user.email);
         console.log(usuarioPromise);
         if (usuarioPromise instanceof Promise && usuarioPromise === null) {
           const userLogin = {
@@ -78,7 +82,14 @@ const Registro: React.FC<{}> = () => {
           });
       }
     }
-  }, [navigate, user, userByMail /* createUser */]);
+  }, [navigate, user, UserStore]);
+
+  const onChange = () => {
+    if (captcha.current?.getValue()) {
+      console.log("el usuario no es un robot", captcha.current.getValue());
+      setCaptchaValido(true);
+    }
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -94,6 +105,7 @@ const Registro: React.FC<{}> = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (typeof usuario.age === "string") {
       usuario.age = parseFloat(usuario.age);
     }
@@ -103,25 +115,36 @@ const Registro: React.FC<{}> = () => {
     if (typeof usuario.number === "string") {
       usuario.number = parseFloat(usuario.number);
     }
+
     usuario.apartment = apartment;
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        UserStore.createUser(usuario);
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
-      }
-    });
+
+    if (captcha.current?.getValue()) {
+      console.log("el usuario no es un robot", captcha.current.getValue());
+      setUsuarioValido(true);
+      setCaptchaValido(true);
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          UserStore.createUser(usuario);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
+      });
+    } else {
+      console.log("primero debes completar el CAPTCHA");
+      setUsuarioValido(false);
+      setCaptchaValido(false);
+    }
   };
 
   return (
@@ -217,7 +240,12 @@ const Registro: React.FC<{}> = () => {
             onChange={handleInputChange}
           />
         </FormControl>
-
+        <ReCAPTCHA
+          ref={captcha}
+          sitekey="6Lf_ZJ0pAAAAAFZUFexbCLg9vd1Zi7o5d80rUQ5-"
+          onChange={onChange}
+          /* onErrored={() => console.log("Error al cargar reCAPTCHA")} */
+        />
         <Grid pb="4">
           <Button type="submit">Guardar</Button>
         </Grid>
