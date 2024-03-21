@@ -1,8 +1,8 @@
 import React from "react";
 import { ChakraProvider, theme } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
-import Root from "./components/Root";
-import Error from "./components/Error";
+
+import Error from "./components/Error/Error";
 import NavBar from "./components/NavBar/NavBar";
 import Profile from "./components/LoginButtons/Profile";
 import Registro from "./components/Registro/Registro";
@@ -12,6 +12,8 @@ import CardDetail from "./components/CardDetail/CardDetail";
 import Sucursales from "./components/Sucursales/Sucursales";
 import QuienesSomos from "./components/QuienesSomos/QuienesSomos";
 import Contacto from "./components/Contacto/Contacto";
+import CowCuts from "./components/CowCuts/CowCuts";
+import PigCuts from "./components/PigCuts/PigCuts";
 
 function App() {
   return (
@@ -19,7 +21,8 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" Component={LandingPage} />
-        <Route path="/cow" Component={Root} />
+        <Route path="/cow" Component={CowCuts} />
+        <Route path="/pig" Component={PigCuts} />
         <Route path="/:id" Component={CardDetail} />
         <Route path="/registrarse" Component={Registro} />
         <Route path="*" Component={Error} />

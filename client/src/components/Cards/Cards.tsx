@@ -12,19 +12,21 @@ import {
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useCowStore } from "../../store/cowStore";
+import { usePigStore } from "../../store/pigStore";
+import CutsAtributtes from "../../interfaces/cuts";
 
-export default function ProductSimple() {
-  const cowStore = useCowStore(); // usando el hook directamente
-  const cow = cowStore.cowCuts;
+const Cards: React.FC<CutsAtributtes[]> = (cards) => {
+  const pigStore = usePigStore(); // usando el hook directamente
+  const pig = pigStore.pigCuts;
 
   useEffect(() => {
-    cowStore.getCows();
-  }, [cowStore]);
+    pigStore.getPigs();
+  }, [pigStore]);
 
   return (
     <Center py={12}>
-      {cow && cow.length > 0 ? (
-        cow.map((cow, index) => {
+      {pig && pig.length > 0 ? (
+        pig.map((pig, index) => {
           // Agrega item y index como parámetros
           return (
             // Añade un return aquí
@@ -54,7 +56,7 @@ export default function ProductSimple() {
                   pos: "absolute",
                   top: 5,
                   left: 0,
-                  backgroundImage: `url(${cow.photo})`, // Usa item.IMAGE en lugar de IMAGE
+                  backgroundImage: `url(${pig.photo})`, // Usa item.IMAGE en lugar de IMAGE
                   filter: "blur(15px)",
                   zIndex: -1,
                 }}
@@ -64,13 +66,13 @@ export default function ProductSimple() {
                   },
                 }}
               >
-                <Link href={`/${cow.id}`}>
+                <Link href={`/${pig.id}`}>
                   <Image
                     rounded={"lg"}
                     height={230}
                     width={282}
                     objectFit={"cover"}
-                    src={cow.photo} // Usa item.IMAGE en lugar de IMAGE
+                    src={pig.photo} // Usa item.IMAGE en lugar de IMAGE
                     alt="#"
                   />
                 </Link>
@@ -81,14 +83,14 @@ export default function ProductSimple() {
                   fontSize={"sm"}
                   textTransform={"uppercase"}
                 >
-                  {cow.name} {/* Usa item.name */}
+                  {pig.name} {/* Usa item.name */}
                 </Text>
                 <Heading fontSize={"2xl"} fontFamily={"body"} fontWeight={500}>
                   Nice Chair, pink
                 </Heading>
                 <Stack direction={"row"} align={"center"}>
                   <Text fontWeight={800} fontSize={"xl"}>
-                    ${cow.price} {/* Usa item.price */}
+                    ${pig.price} {/* Usa item.price */}
                   </Text>
                   <Text textDecoration={"line-through"} color={"gray.600"}>
                     $199
@@ -103,4 +105,6 @@ export default function ProductSimple() {
       )}
     </Center>
   );
-}
+};
+
+export default Cards;
