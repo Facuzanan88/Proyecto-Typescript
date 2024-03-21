@@ -3,7 +3,7 @@ import { getPigCuts, postPigCut } from "../controllers/PigCutsController";
 
 const router = express.Router();
 
-router.get("/cow", getPigCuts);
-router.post("/cow", postPigCut);
+router.get("/pig", getPigCuts);
+router.post("/pig", postPigCut);
 
 export default router;

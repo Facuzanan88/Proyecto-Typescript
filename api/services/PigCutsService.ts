@@ -12,7 +12,7 @@ export const createPigCut = async (cutData: any): Promise<CutsAtributtes> => {
     id: uuidv4(),
     name: cutData.name,
     photo: cutData.photo,
-    price: cutData.weight,
+    price: cutData.price,
     fat: cutData.fat,
     bone: cutData.bone,
     description: cutData.description,
