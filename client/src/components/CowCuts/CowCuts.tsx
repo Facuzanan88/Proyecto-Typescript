@@ -13,7 +13,7 @@ const CowCuts: React.FC<{}> = () => {
   const userStore = useUserStore(); // Usando el hook directamente
   const cowStore = useCowStore(); // usando el hook directamente
 
-  const cow = cowStore.cowCuts; // Asegúrate de que pig sea un array de objetos CutsAtributtes
+  const cards = cowStore.cowCuts; // Asegúrate de que pig sea un array de objetos CutsAtributtes
 
   const handleUser = async () => {
     const mail = "dsfsewrewqweqweqweqdf@gmail.com";
@@ -57,7 +57,7 @@ const CowCuts: React.FC<{}> = () => {
 
         <Profile />
       </div>
-      <Cards cow={cow} />
+      <Cards cards={cards} />
     </>
   );
 };
