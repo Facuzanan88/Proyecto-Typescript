@@ -5,6 +5,7 @@ import UserAtributtes from "../interfaces/user";
 
 interface UserStoreState extends UserAttributes {
   users: UserAtributtes[];
+  user: UserAtributtes;
   getUsers: () => Promise<UserAttributes[]>;
   createUser: (user: object) => Promise<UserAtributtes>;
   userByMail: (email: string) => Promise<UserAtributtes> | null;
@@ -13,6 +14,15 @@ interface UserStoreState extends UserAttributes {
 
 export const useUserStore = create<UserStoreState>((set) => ({
   users: [],
+  user: {
+    name: undefined,
+    lastname: undefined,
+    age: undefined,
+    email: undefined,
+    cel: undefined,
+    street: undefined,
+    number: undefined,
+  },
   id: "",
   name: "",
   lastname: "",
@@ -42,16 +52,18 @@ export const useUserStore = create<UserStoreState>((set) => ({
       const newUser = await res.data;
 
       set((state) => ({
-        id: newUser.id,
-        name: newUser.name,
-        lastname: newUser.lastname,
-        age: newUser.age,
-        email: newUser.email,
-        cel: newUser.cel,
-        street: newUser.street,
-        number: newUser.number,
-        apartment: newUser.apartment,
-        comment: newUser.comment,
+        user: {
+          id: newUser.id,
+          name: newUser.name,
+          lastname: newUser.lastname,
+          age: newUser.age,
+          email: newUser.email,
+          cel: newUser.cel,
+          street: newUser.street,
+          number: newUser.number,
+          apartment: newUser.apartment,
+          comment: newUser.comment,
+        },
       }));
       return newUser;
     } catch (error) {
@@ -67,16 +79,18 @@ export const useUserStore = create<UserStoreState>((set) => ({
       if (user) {
         set((state) => ({
           ...state,
-          id: user.id,
-          name: user.name,
-          lastname: user.lastname,
-          age: user.age,
-          email: user.email,
-          cel: user.cel,
-          street: user.street,
-          number: user.number,
-          apartment: user.apartment,
-          comment: user.comment,
+          user: {
+            id: user.id,
+            name: user.name,
+            lastname: user.lastname,
+            age: user.age,
+            email: user.email,
+            cel: user.cel,
+            street: user.street,
+            number: user.number,
+            apartment: user.apartment,
+            comment: user.comment,
+          },
         }));
         return user;
       } else {
@@ -94,16 +108,18 @@ export const useUserStore = create<UserStoreState>((set) => ({
 
       set((state) => ({
         ...state,
-        id: newUser.id,
-        name: newUser.name,
-        lastname: newUser.lastname,
-        age: newUser.age,
-        email: newUser.email,
-        cel: newUser.cel,
-        street: newUser.street,
-        number: newUser.number,
-        apartment: newUser.apartment,
-        comment: newUser.comment,
+        user: {
+          id: newUser.id,
+          name: newUser.name,
+          lastname: newUser.lastname,
+          age: newUser.age,
+          email: newUser.email,
+          cel: newUser.cel,
+          street: newUser.street,
+          number: newUser.number,
+          apartment: newUser.apartment,
+          comment: newUser.comment,
+        },
       }));
     } catch (error) {
       // Manejar el error, por ejemplo, mostrar un mensaje de error o registrarlo.
