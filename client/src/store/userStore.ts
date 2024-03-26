@@ -64,20 +64,24 @@ export const useUserStore = create<UserStoreState>((set) => ({
       const res = await axios.get(`http://localhost:3001/users?email=${email}`);
       const user = await res.data;
 
-      set((state) => ({
-        ...state,
-        id: user.id,
-        name: user.name,
-        lastname: user.lastname,
-        age: user.age,
-        email: user.email,
-        cel: user.cel,
-        street: user.street,
-        number: user.number,
-        apartment: user.apartment,
-        comment: user.comment,
-      }));
-      return user;
+      if (user) {
+        set((state) => ({
+          ...state,
+          id: user.id,
+          name: user.name,
+          lastname: user.lastname,
+          age: user.age,
+          email: user.email,
+          cel: user.cel,
+          street: user.street,
+          number: user.number,
+          apartment: user.apartment,
+          comment: user.comment,
+        }));
+        return user;
+      } else {
+        console.log("no existe un usuario con ese mail");
+      }
     } catch (error) {
       // Manejar el error, por ejemplo, mostrar un mensaje de error o registrarlo.
       console.error("Error al obtener el usuario:", error);
