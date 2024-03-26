@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Error from "./components/Error/Error";
 import NavBar from "./components/NavBar/NavBar";
-import Profile from "./components/LoginButtons/Profile";
+import Perfil from "./components/Perfil/Perfil";
 import Registro from "./components/Registro/Registro";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Footer from "./components/Footer/Footer";
@@ -25,6 +25,7 @@ function App() {
         <Route path="/pig" Component={PigCuts} />
         <Route path="/:id" Component={CardDetail} />
         <Route path="/registrarse" Component={Registro} />
+        <Route path="/profile" Component={Perfil} />
         <Route path="*" Component={Error} />
         <Route path="/sucursales" Component={Sucursales} />
         <Route path="/quienessomos" Component={QuienesSomos} />
