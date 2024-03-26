@@ -19,19 +19,6 @@ const CowCuts: React.FC<{}> = () => {
     cowStore.getCows();
   }, [cowStore.getCows, cowStore]);
 
-  /*  useEffect(() => {
-    try {
-      const cards = await cowStore.getCows(); // Usando getUsers desde el store
-      setCuts(cards);
-      if (cards && cards.length !== 0) {
-        console.log(cards, "estado");
-        return cards;
-      }
-    } catch (error) {
-      console.error("Error al obtener usuarios:", error);
-    }
-  }); */
-
   const handleUser = async () => {
     const mail = "dsfsewrewqweqweqweqdf@gmail.com";
     const userMail = await userStore.userByMail(mail); // Usando userByMail desde el store

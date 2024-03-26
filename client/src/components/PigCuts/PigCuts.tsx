@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserAtributtes from "../../interfaces/user";
 import Profile from "../LoginButtons/Profile";
 import { useUserStore } from "../../store/userStore";
@@ -9,6 +9,12 @@ const PigCuts: React.FC<{}> = () => {
   const [user, setUser] = useState<UserAtributtes | null>(null);
   const pigStore = usePigStore();
   const userStore = useUserStore(); // Usando el hook directamente
+
+  const cards = pigStore.pigCuts;
+
+  useEffect(() => {
+    pigStore.getPigs();
+  }, [pigStore.getPigs, pigStore]);
 
   const handleUser = async () => {
     const mail = "dsfsewrewqweqweqweqdf@gmail.com";
@@ -51,7 +57,7 @@ const PigCuts: React.FC<{}> = () => {
 
         <Profile />
       </div>
-      {/*   <Cards /> */}
+      <Cards cards={cards} />
     </>
   );
 };
