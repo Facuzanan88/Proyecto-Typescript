@@ -15,18 +15,15 @@ import { useCowStore } from "../../store/cowStore";
 import { usePigStore } from "../../store/pigStore";
 import CutsAtributtes from "../../interfaces/cuts";
 
-const Cards: React.FC<CutsAtributtes[]> = (cards) => {
-  const pigStore = usePigStore(); // usando el hook directamente
-  const pig = pigStore.pigCuts;
+interface CardsCow {
+  cards: CutsAtributtes[] | null;
+}
 
-  useEffect(() => {
-    pigStore.getPigs();
-  }, [pigStore]);
-
+const Cards: React.FC<CardsCow> = ({ cards }) => {
   return (
     <Center py={12}>
-      {pig && pig.length > 0 ? (
-        pig.map((pig, index) => {
+      {cards && cards.length > 0 ? (
+        cards.map((card, index) => {
           // Agrega item y index como parámetros
           return (
             // Añade un return aquí
@@ -56,7 +53,7 @@ const Cards: React.FC<CutsAtributtes[]> = (cards) => {
                   pos: "absolute",
                   top: 5,
                   left: 0,
-                  backgroundImage: `url(${pig.photo})`, // Usa item.IMAGE en lugar de IMAGE
+                  backgroundImage: `url(${card.photo})`, // Usa item.IMAGE en lugar de IMAGE
                   filter: "blur(15px)",
                   zIndex: -1,
                 }}
@@ -66,13 +63,13 @@ const Cards: React.FC<CutsAtributtes[]> = (cards) => {
                   },
                 }}
               >
-                <Link href={`/${pig.id}`}>
+                <Link href={`/${card.id}`}>
                   <Image
                     rounded={"lg"}
                     height={230}
                     width={282}
                     objectFit={"cover"}
-                    src={pig.photo} // Usa item.IMAGE en lugar de IMAGE
+                    src={card.photo} // Usa item.IMAGE en lugar de IMAGE
                     alt="#"
                   />
                 </Link>
@@ -83,14 +80,14 @@ const Cards: React.FC<CutsAtributtes[]> = (cards) => {
                   fontSize={"sm"}
                   textTransform={"uppercase"}
                 >
-                  {pig.name} {/* Usa item.name */}
+                  {card.name} {/* Usa item.name */}
                 </Text>
                 <Heading fontSize={"2xl"} fontFamily={"body"} fontWeight={500}>
                   Nice Chair, pink
                 </Heading>
                 <Stack direction={"row"} align={"center"}>
                   <Text fontWeight={800} fontSize={"xl"}>
-                    ${pig.price} {/* Usa item.price */}
+                    ${card.price} {/* Usa item.price */}
                   </Text>
                   <Text textDecoration={"line-through"} color={"gray.600"}>
                     $199
@@ -101,7 +98,7 @@ const Cards: React.FC<CutsAtributtes[]> = (cards) => {
           );
         })
       ) : (
-        <Text>No hay corte</Text>
+        <Text>No hay cortes</Text>
       )}
     </Center>
   );

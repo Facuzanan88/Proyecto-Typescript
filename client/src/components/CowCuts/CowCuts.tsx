@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserAtributtes from "../../interfaces/user";
 import CutsAtributtes from "../../interfaces/cuts";
 import Profile from "../LoginButtons/Profile";
@@ -15,6 +15,23 @@ const CowCuts: React.FC<{}> = () => {
 
   const cards = cowStore.cowCuts; // Asegúrate de que pig sea un array de objetos CutsAtributtes
 
+  useEffect(() => {
+    cowStore.getCows();
+  }, [cowStore.getCows, cowStore]);
+
+  /*  useEffect(() => {
+    try {
+      const cards = await cowStore.getCows(); // Usando getUsers desde el store
+      setCuts(cards);
+      if (cards && cards.length !== 0) {
+        console.log(cards, "estado");
+        return cards;
+      }
+    } catch (error) {
+      console.error("Error al obtener usuarios:", error);
+    }
+  }); */
+
   const handleUser = async () => {
     const mail = "dsfsewrewqweqweqweqdf@gmail.com";
     const userMail = await userStore.userByMail(mail); // Usando userByMail desde el store
@@ -26,6 +43,7 @@ const CowCuts: React.FC<{}> = () => {
       const result = await userStore.getUsers(); // Usando getUsers desde el store
       if (result && result.length !== 0) {
         console.log(result, "estado");
+        console.log(cards);
         setUser(result[0]);
       }
     } catch (error) {
