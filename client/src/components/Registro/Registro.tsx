@@ -25,6 +25,7 @@ const Registro: React.FC<{}> = () => {
     id: state.id,
     name: state.name,
     lastname: state.lastname,
+    photo: state.photo,
     age: state.age,
     email: state.email,
     cel: state.cel,
@@ -39,6 +40,7 @@ const Registro: React.FC<{}> = () => {
   const [usuario, setUsuario] = useState<UserAtributtes>({
     name: "",
     lastname: "",
+    photo: "",
     age: 0,
     email: "",
     cel: 0,
@@ -166,6 +168,16 @@ const Registro: React.FC<{}> = () => {
             type="text"
             name="lastname"
             value={usuario.lastname ? usuario.lastname : userByStore.lastname}
+            onChange={handleInputChange}
+          />
+        </FormControl>
+
+        <FormControl id="photo" w="50%">
+          <FormLabel>Foto:</FormLabel>
+          <Input
+            type="text"
+            name="photo"
+            value={usuario.photo ? usuario.photo : userByStore.photo}
             onChange={handleInputChange}
           />
         </FormControl>

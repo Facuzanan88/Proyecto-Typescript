@@ -31,15 +31,16 @@ const SocialProfileWithImageHorizontal: React.FC<{}> = () => {
           // Suponiendo que userStore.userByMail devuelve una promesa
           const usuario = await userStore.userByMail(emailParam);
           console.log(usuario);
+          if (usuario !== null) {
+            console.log(usuario.photo);
+          }
         }
       } catch (error) {
         console.error("Error al obtener el usuario:", error);
       }
     };
 
-    fetchData(); // Llamar a la función asincrónica dentro de useEffect
-
-    // Es posible que necesites ajustar las dependencias aquí según tu lógica
+    fetchData();
   }, []);
 
   return (
@@ -59,10 +60,8 @@ const SocialProfileWithImageHorizontal: React.FC<{}> = () => {
           <Image
             objectFit="cover"
             boxSize="100%"
-            src={
-              "https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-            }
-            alt="#"
+            src={user.photo}
+            alt="la foto no funciona"
           />
         </Flex>
         <Stack
@@ -77,7 +76,7 @@ const SocialProfileWithImageHorizontal: React.FC<{}> = () => {
             {user.name} {user.lastname}
           </Heading>
           <Text fontWeight={600} color={"gray.500"} size="sm" mb={4}>
-            @lindsey_jam3s
+            @lindsey_jam3s{user.name}
           </Text>
           <Text
             textAlign={"center"}
@@ -87,7 +86,7 @@ const SocialProfileWithImageHorizontal: React.FC<{}> = () => {
           >
             Actress, musician, songwriter and artist. PM for work inquires or
             <Text color={"blue.400"}>#tag</Text>
-            me in your posts
+            {user.cel}
           </Text>
           <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
             <Badge
