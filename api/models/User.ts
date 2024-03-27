@@ -7,6 +7,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     id!: string;
     name!: string;
     lastname!: string;
+    photo!: string;
     email!: string;
     cel!: number;
     street!: string;
@@ -29,6 +30,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
         allowNull: false,
       },
       lastname: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      photo: {
         type: DataTypes.STRING,
         allowNull: false,
       },

@@ -12,6 +12,7 @@ export const createUser = async (userData: any): Promise<UserAtributtes> => {
     id: uuidv4(),
     name: userData.name,
     lastname: userData.lastname,
+    photo: userData.photo,
     age: userData.age,
     email: userData.email,
     cel: userData.cel,
@@ -29,6 +30,7 @@ export const modifyUser = async (userData: any): Promise<UserAtributtes> => {
   await result.update({
     name: userData.name,
     lastname: userData.lastname,
+    photo: userData.photo,
     age: userData.age,
     cel: userData.cel,
     street: userData.street,
