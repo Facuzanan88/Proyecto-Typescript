@@ -28,7 +28,6 @@ const SocialProfileWithImageHorizontal: React.FC<{}> = () => {
       try {
         const emailParam = searchParams.get("email");
         if (emailParam && emailParam !== null) {
-          // Suponiendo que userStore.userByMail devuelve una promesa
           const usuario = await userStore.userByMail(emailParam);
           console.log(usuario);
           if (usuario !== null) {
@@ -51,7 +50,6 @@ const SocialProfileWithImageHorizontal: React.FC<{}> = () => {
         w={{ sm: "100%", md: "540px" }}
         height={{ sm: "476px", md: "20rem" }}
         direction={{ base: "column", md: "row" }}
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
         padding={4}
