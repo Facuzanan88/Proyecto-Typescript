@@ -74,7 +74,7 @@ const SocialProfileWithImageHorizontal: React.FC<{}> = () => {
             {user.name} {user.lastname}
           </Heading>
           <Text fontWeight={600} color={"gray.500"} size="sm" mb={4}>
-            @lindsey_jam3s{user.name}
+            {user.name}
           </Text>
           <Text
             textAlign={"center"}
