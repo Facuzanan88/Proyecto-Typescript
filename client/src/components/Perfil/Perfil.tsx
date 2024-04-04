@@ -150,7 +150,7 @@ const SocialProfileWithImageHorizontal: React.FC<{}> = () => {
                 bg: "blue.500",
               }}
             >
-              Follow
+              {user.number}
             </Button>
           </Stack>
         </Stack>
