@@ -112,7 +112,7 @@ const SocialProfileWithImageHorizontal: React.FC<{}> = () => {
               bg={useColorModeValue("gray.50", "gray.800")}
               fontWeight={"400"}
             >
-              #music
+              {user.age}
             </Badge>
           </Stack>
 
