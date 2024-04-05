@@ -26,10 +26,10 @@ import logo from "../../Assest/logo.jpg";
 
 import { useState, useEffect } from "react";
 import LogInButton from "../LoginButtons/LogInButton";
-import LogOutButtn from "../LoginButtons/LogOutButton";
-/* import { RootState } from "../../Redux/store"; */
+import LogOutButton from "../LoginButtons/LogOutButton";
+import { useUserStore } from "../../store/userStore";
 
-const NavBar = () => {
+const NavBar: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
 
   const [width, setWidth] = useState(0);
@@ -91,7 +91,7 @@ const NavBar = () => {
         </Flex>
 
         <LogInButton />
-        <LogOutButtn />
+        <LogOutButton />
 
         <ColorModeSwitcher />
       </Flex>
@@ -103,7 +103,7 @@ const NavBar = () => {
   );
 };
 
-const DesktopNav = () => {
+const DesktopNav: React.FC = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
@@ -152,7 +152,7 @@ const DesktopNav = () => {
   );
 };
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav: React.FC<NavItem> = ({ label, href, subLabel }) => {
   return (
     <Link
       href={href}
@@ -189,7 +189,9 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   );
 };
 
-const MobileNav = () => {
+const MobileNav: React.FC = () => {
+  const userStore = useUserStore(); // Usando el hook directamente
+  const user = userStore.user;
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
@@ -203,7 +205,7 @@ const MobileNav = () => {
   );
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem: React.FC<NavItem> = ({ label, children, href }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -288,7 +290,7 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "Perfil",
-    href: "/profile",
+    href: `profile?email=${user.email}`,
   },
   {
     label: "Contacto",
