@@ -192,7 +192,8 @@ const CardDetail: React.FC<{}> = () => {
         </Button>
         <Text fontSize={"xs"} maxW={300} textAlign={"center"}>
           El peso del producto recibido puede variar brevemente del ingresado lo
-          que impacta directamente en el precio, sin ser cambios significativos
+          que impacta directamente en el precio total, sin ser cambios
+          significativos
         </Text>
       </Stack>
     </Container>
