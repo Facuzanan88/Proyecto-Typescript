@@ -32,6 +32,9 @@ import { useUserStore } from "../../store/userStore";
 const NavBar: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
 
+  const userStore = useUserStore(); // Usando el hook directamente
+  const user = userStore.user;
+
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
@@ -190,8 +193,6 @@ const DesktopSubNav: React.FC<NavItem> = ({ label, href, subLabel }) => {
 };
 
 const MobileNav: React.FC = () => {
-  const userStore = useUserStore(); // Usando el hook directamente
-  const user = userStore.user;
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
