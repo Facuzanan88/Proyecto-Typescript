@@ -187,7 +187,7 @@ const CardDetail: React.FC<{}> = () => {
             boxShadow: "lg",
           }}
         >
-          <Text mr={4}>Agrego al Carrito</Text>
+          <Text mr={4}>Agregar al Carrito</Text>
           <MdLocalShipping />
         </Button>
         <Text fontSize={"xs"} maxW={300} textAlign={"center"}>
