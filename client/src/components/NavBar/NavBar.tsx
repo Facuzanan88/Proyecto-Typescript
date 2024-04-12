@@ -32,13 +32,14 @@ import { useUserStore } from "../../store/userStore";
 const NavBar: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
 
-  const userStore = useUserStore(); // Usando el hook directamente
-  const user = userStore.user;
-
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
-  useEffect(() => {});
+  const userStore = useUserStore(); // Usando el hook directamente
+
+  useEffect(() => {
+    userStore.userByMail("facuzanana@gmail.com");
+  });
 
   const handleResize = () => {
     setWidth(window.innerWidth);
@@ -111,9 +112,53 @@ const DesktopNav: React.FC = () => {
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
+  const userStore = useUserStore(); // Usando el hook directamente
+  const user = userStore.user;
+
+  const NAV_ITEMS1: Array<NavItem> = [
+    {
+      label: "Productos",
+      /* href: "/properties", */
+      children: [
+        {
+          label: "Vaca",
+          href: "/cow",
+        },
+        {
+          label: "Cerdo",
+          href: "/pig",
+        },
+        {
+          label: "Embutidos",
+          href: "/sausages",
+        },
+      ],
+    },
+    {
+      label: "Formulario",
+      href: "/registrarse",
+    },
+    {
+      label: "Perfil",
+      href: user ? `profile?email=${user.email}` : "nada",
+    },
+    {
+      label: "Contacto",
+      href: "/contacto",
+    },
+    {
+      label: "Quienes Somos",
+      href: "/quienessomos",
+    },
+    {
+      label: "Sucursales",
+      href: "/sucursales",
+    },
+  ];
+
   return (
     <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
+      {NAV_ITEMS1.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
@@ -193,6 +238,51 @@ const DesktopSubNav: React.FC<NavItem> = ({ label, href, subLabel }) => {
 };
 
 const MobileNav: React.FC = () => {
+  const userStore = useUserStore(); // Usando el hook directamente
+  const user = userStore.user;
+  console.log(user, "USUARIO");
+
+  const NAV_ITEMS: Array<NavItem> = [
+    {
+      label: "Productos",
+      /* href: "/properties", */
+      children: [
+        {
+          label: "Vaca",
+          href: "/cow",
+        },
+        {
+          label: "Cerdo",
+          href: "/pig",
+        },
+        {
+          label: "Embutidos",
+          href: "/sausages",
+        },
+      ],
+    },
+    {
+      label: "Formulario",
+      href: "/registrarse",
+    },
+    {
+      label: "Perfil",
+      href: user ? `profile=email=${user.email}` : "nada",
+    },
+    {
+      label: "Contacto",
+      href: "/contacto",
+    },
+    {
+      label: "Quienes Somos",
+      href: "/quienessomos",
+    },
+    {
+      label: "Sucursales",
+      href: "/sucursales",
+    },
+  ];
+
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
@@ -264,47 +354,7 @@ interface NavItem {
   subLabel?: string;
   children?: Array<NavItem>;
   href?: string;
+  user?: Promise<Object>;
 }
-
-const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: "Productos",
-    /* href: "/properties", */
-    children: [
-      {
-        label: "Vaca",
-        href: "/cow",
-      },
-      {
-        label: "Cerdo",
-        href: "/pig",
-      },
-      {
-        label: "Embutidos",
-        href: "/sausages",
-      },
-    ],
-  },
-  {
-    label: "Formulario",
-    href: "/registrarse",
-  },
-  {
-    label: "Perfil",
-    href: `profile?email=${user.email}`,
-  },
-  {
-    label: "Contacto",
-    href: "/contacto",
-  },
-  {
-    label: "Quienes Somos",
-    href: "/quienessomos",
-  },
-  {
-    label: "Sucursales",
-    href: "/sucursales",
-  },
-];
 
 export default NavBar;
