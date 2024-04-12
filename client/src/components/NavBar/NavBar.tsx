@@ -28,6 +28,7 @@ import { useState, useEffect } from "react";
 import LogInButton from "../LoginButtons/LogInButton";
 import LogOutButton from "../LoginButtons/LogOutButton";
 import { useUserStore } from "../../store/userStore";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const NavBar: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -112,6 +113,8 @@ const DesktopNav: React.FC = () => {
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
+  const { isAuthenticated } = useAuth0(); // Obtén la función isAuthenticated de useAuth0
+
   const userStore = useUserStore(); // Usando el hook directamente
   const user = userStore.user;
 
@@ -140,7 +143,7 @@ const DesktopNav: React.FC = () => {
     },
     {
       label: "Perfil",
-      href: user ? `profile?email=${user.email}` : "nada",
+      href: isAuthenticated ? `profile?email=${user.email}` : "",
     },
     {
       label: "Contacto",
