@@ -142,7 +142,7 @@ const CardDetail: React.FC<{}> = () => {
                       display={"flex"}
                       justifyContent={"center"}
                     >
-                      PESO (KG)
+                      PESO (aprox.) (KG)
                     </Text>
                     <Input
                       maxW={150}
