@@ -1,25 +1,51 @@
+import {
+  Box,
+  chakra,
+  Container,
+  Stack,
+  Text,
+  Image,
+  Flex,
+  VStack,
+  Button,
+  Heading,
+  SimpleGrid,
+  StackDivider,
+  useColorModeValue,
+  VisuallyHidden,
+  List,
+  ListItem,
+  Input,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import UserAtributtes from "../../interfaces/user";
-import { getUsers, userByMail } from "../../services/usersService";
-import { useUserStore } from "../../store/userStore";
-import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Carousel from "../Corousel/Carousel";
 import Features from "../../components/Features/Features";
 import PrincipalCategory from "../PrincipalCategory/PrincipalCategory";
+import { useUserStore } from "../../store/userStore";
 
 const LandingPage: React.FC<{}> = () => {
-  const userByStore = useUserStore((state) => ({
-    id: state.id,
-    name: state.name,
-    lastname: state.lastname,
-    email: state.email,
-    cel: state.cel,
-    street: state.street,
-    number: state.number,
-    apartment: state.apartment,
-    comment: state.comment,
-  }));
+  const { user, isAuthenticated } = useAuth0();
+
+  const userStore = useUserStore(); // Usando el hook directamente
+
+  useEffect(() => {
+    if (isAuthenticated && user && user.email) {
+      if (!userStore.userByMail(user.email)) {
+        const newUser = {
+          name: user.given_name,
+          lastname: user.family_name,
+          photo: user.picture,
+          age: 0,
+          email: user.email,
+          cel: 0,
+          street: "",
+          number: 0,
+        };
+        userStore.createUser(newUser);
+      }
+    }
+  }, [isAuthenticated, user]);
 
   const handleClick = async () => {};
 
@@ -27,11 +53,13 @@ const LandingPage: React.FC<{}> = () => {
 
   return (
     <>
+      <Stack justifyContent={"center"} alignItems={"center"} my={10}>
+        <Text>{user?.given_name}</Text>
+      </Stack>
       <div>
         <Carousel />
         <Features />
         <PrincipalCategory />
-        <h1>FACUNDO</h1>
         <button onClick={handleClick}>Usuarios</button>
         <button onClick={handleGet}>Mostrar</button>
       </div>
