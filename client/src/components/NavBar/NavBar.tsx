@@ -243,7 +243,6 @@ const DesktopSubNav: React.FC<NavItem> = ({ label, href, subLabel }) => {
 const MobileNav: React.FC = () => {
   const userStore = useUserStore(); // Usando el hook directamente
   const user = userStore.user;
-  console.log(user, "USUARIO");
 
   const NAV_ITEMS: Array<NavItem> = [
     {
