@@ -30,22 +30,27 @@ const LandingPage: React.FC<{}> = () => {
   const userStore = useUserStore(); // Usando el hook directamente
 
   useEffect(() => {
-    if (isAuthenticated && user && user.email) {
-      if (!userStore.userByMail(user.email)) {
-        const newUser = {
-          name: user.given_name,
-          lastname: user.family_name,
-          photo: user.picture,
-          age: 0,
-          email: user.email,
-          cel: 0,
-          street: "",
-          number: 0,
-        };
-        userStore.createUser(newUser);
+    const fetchData = async () => {
+      if (isAuthenticated && user && user.email) {
+        const existingUser = await userStore.userByMail(user.email);
+        if (!existingUser) {
+          const newUser = {
+            name: user.given_name,
+            lastname: user.family_name,
+            photo: user.picture,
+            age: 0,
+            email: user.email,
+            cel: 0,
+            street: "",
+            number: 0,
+          };
+          await userStore.createUser(newUser);
+        }
       }
-    }
-  }, [isAuthenticated, user]);
+    };
+
+    fetchData(); // Llama a la función fetchData para iniciar la operación asincrónica
+  }, [isAuthenticated, user, userStore]); // Dependencias del useEffect
 
   const handleClick = async () => {};
 
