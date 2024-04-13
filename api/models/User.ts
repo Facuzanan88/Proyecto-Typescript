@@ -35,11 +35,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       photo: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       age: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -52,11 +52,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       street: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       number: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       apartment: {
         type: DataTypes.BOOLEAN,
