@@ -9,7 +9,7 @@ interface UserStoreState extends UserAttributes {
   getUsers: () => Promise<UserAttributes[]>;
   createUser: (user: object) => Promise<UserAtributtes>;
   userByMail: (email: string) => Promise<UserAtributtes> | null;
-  modifyUser: (updateUser: object) => Promise<void>;
+  modifyUser: (idUser: string, updateUser: object) => Promise<void>;
 }
 
 export const useUserStore = create<UserStoreState>((set) => ({
@@ -97,15 +97,14 @@ export const useUserStore = create<UserStoreState>((set) => ({
           },
         }));
         return user;
-      } else {
-        console.log("no existe un usuario con ese mail");
       }
     } catch (error) {
       // Manejar el error, por ejemplo, mostrar un mensaje de error o registrarlo.
       console.error("Error al obtener el usuario:", error);
     }
   },
-  modifyUser: async (user: object) => {
+  modifyUser: async (id: string, user: object) => {
+    // ARREGLAR FUNCION
     try {
       const res = await axios.put("http://localhost:3001/users", user);
       const newUser = await res.data;
