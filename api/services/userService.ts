@@ -24,21 +24,34 @@ export const createUser = async (userData: any): Promise<UserAtributtes> => {
   return result;
 };
 
-export const modifyUser = async (userData: any): Promise<UserAtributtes> => {
-  let result = await db.User.findByPk(userData.id);
+export const modifyUser = async (
+  id: string,
+  updateUser: any
+): Promise<UserAtributtes | null> => {
+  try {
+    let result = await db.User.findByPk(id);
 
-  await result.update({
-    name: userData.name,
-    lastname: userData.lastname,
-    photo: userData.photo,
-    age: userData.age,
-    cel: userData.cel,
-    street: userData.street,
-    number: userData.number,
-    apartment: userData.apartment,
-    comment: userData.comment,
-  });
-  return result;
+    if (!result) {
+      throw new Error("User not found");
+    }
+
+    await result.update({
+      name: updateUser.name,
+      lastname: updateUser.lastname,
+      photo: updateUser.photo,
+      age: updateUser.age,
+      cel: updateUser.cel,
+      street: updateUser.street,
+      number: updateUser.number,
+      apartment: updateUser.apartment,
+      comment: updateUser.comment,
+    });
+
+    return result;
+  } catch (error) {
+    console.error("Error modifying user:", error);
+    return null;
+  }
 };
 
 export const getAUser = async (id: string): Promise<UserAtributtes> => {

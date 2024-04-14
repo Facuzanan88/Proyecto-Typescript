@@ -48,8 +48,9 @@ export async function postUser(req: Request, res: Response): Promise<void> {
 
 export async function putUser(req: Request, res: Response): Promise<void> {
   const updateUser = req.body;
+  const id = updateUser.id;
   try {
-    let result = await userService.modifyUser(updateUser);
+    let result = await userService.modifyUser(id, updateUser);
     res.status(200).json(result);
   } catch (error) {
     console.log(error);
