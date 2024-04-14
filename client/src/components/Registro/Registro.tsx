@@ -21,21 +21,7 @@ const Registro: React.FC<{}> = () => {
   const [captchaValido, setCaptchaValido] = useState(true);
   const [usuarioValido, setUsuarioValido] = useState(false);
 
-  const userByStore = useUserStore((state) => ({
-    id: state.id,
-    name: state.name,
-    lastname: state.lastname,
-    photo: state.photo,
-    age: state.age,
-    email: state.email,
-    cel: state.cel,
-    street: state.street,
-    number: state.number,
-    apartment: state.apartment,
-    comment: state.comment,
-  }));
-
-  const [apartment, setApartment] = useState(userByStore?.apartment || false);
+  const [apartment, setApartment] = useState(false);
 
   const [usuario, setUsuario] = useState<UserAtributtes>({
     name: "",
@@ -57,34 +43,27 @@ const Registro: React.FC<{}> = () => {
   const captcha = useRef<ReCAPTCHAType | null>(null); // Definir el tipo explícitamente
 
   useEffect(() => {
-    if (user) {
-      if (user.email) {
-        const usuarioPromise: Promise<UserAtributtes> | null =
-          UserStore.userByMail(user.email);
-        console.log(usuarioPromise);
-        if (usuarioPromise instanceof Promise && usuarioPromise === null) {
-          const userLogin = {
-            name: user.given_name,
-            lastname: user.family_name,
-            email: user.email,
-          };
-          /*   createUser(userLogin); */
-        }
-        if (!usuarioPromise) {
-          return;
-        }
-        usuarioPromise
-          .then((usuario: UserAtributtes) => {
-            if (usuario.number !== null) {
-              navigate("/");
-            }
-          })
-          .catch((error) => {
-            console.error("Error al obtener el usuario:", error);
+    const fetchData = async () => {
+      if (user && user.email) {
+        const oldUser = await UserStore.userByMail(user.email);
+        if (oldUser && oldUser.email) {
+          setUsuario({
+            ...usuario,
+            name: oldUser.name,
+            lastname: oldUser.lastname,
+            photo: oldUser.photo,
+            email: oldUser.email,
           });
+          console.log(oldUser, "Olduser");
+        } else {
+          const newUser = await UserStore.createUser(user);
+          console.log(newUser, "newUser");
+        }
       }
-    }
-  }, [navigate, user, UserStore]);
+    };
+
+    fetchData(); // Llama a la función fetchData para iniciar la operación asincrónica
+  }, [user]); // Agrega user como dependencia para que el useEffect se ejecute cuando user cambie
 
   const onChange = () => {
     if (captcha.current?.getValue()) {
@@ -108,6 +87,8 @@ const Registro: React.FC<{}> = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const idUser = UserStore.user.id;
+
     if (typeof usuario.age === "string") {
       usuario.age = parseFloat(usuario.age);
     }
@@ -122,6 +103,7 @@ const Registro: React.FC<{}> = () => {
 
     if (captcha.current?.getValue()) {
       console.log("el usuario no es un robot");
+      console.log(idUser);
       setUsuarioValido(true);
       setCaptchaValido(true);
       Swal.fire({
@@ -133,8 +115,8 @@ const Registro: React.FC<{}> = () => {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
-        if (result.isConfirmed) {
-          UserStore.createUser(usuario);
+        if (result.isConfirmed && idUser) {
+          UserStore.modifyUser(idUser, usuario);
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
@@ -157,7 +139,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="name"
-            value={usuario.name ? usuario.name : userByStore.name}
+            value={usuario?.name}
             onChange={handleInputChange}
           />
         </FormControl>
@@ -167,7 +149,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="lastname"
-            value={usuario.lastname ? usuario.lastname : userByStore.lastname}
+            value={usuario?.lastname}
             onChange={handleInputChange}
           />
         </FormControl>
@@ -177,7 +159,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="photo"
-            value={usuario.photo ? usuario.photo : userByStore.photo}
+            value={usuario?.photo}
             onChange={handleInputChange}
           />
         </FormControl>
@@ -187,7 +169,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="number"
             name="age"
-            value={usuario.age ? usuario.age : userByStore.age}
+            value={usuario?.age}
             onChange={handleInputChange}
           />
         </FormControl>
@@ -197,7 +179,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="email"
-            value={usuario.email ? usuario.email : userByStore.email}
+            value={usuario?.email}
             onChange={handleInputChange}
           />
         </FormControl>
@@ -207,7 +189,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="number"
             name="cel"
-            value={usuario.cel ? usuario.cel : userByStore.cel}
+            value={usuario?.cel}
             onChange={handleInputChange}
             required
           />
@@ -218,7 +200,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="street"
-            value={usuario.street ? usuario.street : userByStore.street}
+            value={usuario?.street}
             onChange={handleInputChange}
           />
         </FormControl>
@@ -228,7 +210,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="number"
             name="number"
-            value={usuario.number ? usuario.number : userByStore.number}
+            value={usuario?.number}
             onChange={handleInputChange}
             required
           />
@@ -248,7 +230,7 @@ const Registro: React.FC<{}> = () => {
           <Input
             type="text"
             name="comment"
-            value={usuario.comment ? usuario.comment : userByStore.comment}
+            value={usuario?.comment}
             onChange={handleInputChange}
           />
         </FormControl>
