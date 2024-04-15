@@ -26,7 +26,6 @@ const PigCuts: React.FC<{}> = () => {
     try {
       const result = await userStore.getUsers(); // Usando getUsers desde el store
       if (result && result.length !== 0) {
-        console.log(result, "estado");
         setUser(result[0]);
       }
     } catch (error) {
@@ -38,7 +37,6 @@ const PigCuts: React.FC<{}> = () => {
     try {
       const result = await pigStore.getPigs(); // Usando getUsers desde el store
       if (result && result.length !== 0) {
-        console.log(result, "estado");
         return result;
       }
     } catch (error) {
