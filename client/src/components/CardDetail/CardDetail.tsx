@@ -40,7 +40,6 @@ const CardDetail: React.FC<{}> = () => {
 
   const id = useParams();
   const idCow = id.id;
-  console.log(idCow);
 
   useEffect(() => {
     cowStore.cowById(idCow);
