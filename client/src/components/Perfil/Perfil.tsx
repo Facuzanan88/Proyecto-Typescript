@@ -28,17 +28,12 @@ const SocialProfileWithImageHorizontal: React.FC<{}> = () => {
       try {
         const emailParam = searchParams.get("email");
         if (emailParam && emailParam !== null) {
-          const usuario = await userStore.userByMail(emailParam);
-          console.log(usuario);
-          if (usuario !== null) {
-            console.log(usuario.photo);
-          }
+          await userStore.userByMail(emailParam);
         }
       } catch (error) {
         console.error("Error al obtener el usuario:", error);
       }
     };
-
     fetchData();
   }, []);
 
