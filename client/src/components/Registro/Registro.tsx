@@ -241,7 +241,7 @@ const Registro: React.FC<{}> = () => {
           /* onErrored={() => console.log("Error al cargar reCAPTCHA")} */
         />
         <Grid pb="4">
-          <Button type="submit">Guardar</Button>
+          <Button type="submit">Guardar Cambios</Button>
         </Grid>
       </VStack>
     </form>
