@@ -107,8 +107,8 @@ const Registro: React.FC<{}> = () => {
       setUsuarioValido(true);
       setCaptchaValido(true);
       Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: "Perfil",
+        text: "Desea guardar los cambios realizados?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -118,8 +118,8 @@ const Registro: React.FC<{}> = () => {
         if (result.isConfirmed && idUser) {
           UserStore.modifyUser(idUser, usuario);
           Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
+            title: "Perfil Guardado",
+            text: "Sus datos han sido guardados correctamente",
             icon: "success",
           });
         }
@@ -135,7 +135,7 @@ const Registro: React.FC<{}> = () => {
     <form onSubmit={handleSubmit}>
       <VStack spacing={4} align="stretch" alignItems="center">
         <FormControl id="name" w="50%">
-          <FormLabel>Nombre</FormLabel>
+          <FormLabel>Nombre:</FormLabel>
           <Input
             type="text"
             name="name"
@@ -145,7 +145,7 @@ const Registro: React.FC<{}> = () => {
         </FormControl>
 
         <FormControl id="lastname" w="50%">
-          <FormLabel>Apellido</FormLabel>
+          <FormLabel>Apellido:</FormLabel>
           <Input
             type="text"
             name="lastname"
