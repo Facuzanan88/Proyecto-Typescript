@@ -226,7 +226,7 @@ const Registro: React.FC<{}> = () => {
         </FormControl>
 
         <FormControl id="comment" w="50%">
-          <FormLabel>Comentario</FormLabel>
+          <FormLabel>Comentarios</FormLabel>
           <Input
             type="text"
             name="comment"
