@@ -57,3 +57,19 @@ export async function putUser(req: Request, res: Response): Promise<void> {
     res.status(500).send("We could not update the user");
   }
 }
+
+export async function userByMail(req: Request, res: Response): Promise<void> {
+  const user = req.body;
+  const id = user.id;
+  try {
+    let result = await userService.getAUser(id);
+    if (result) {
+      res.status(200).json(result);
+    } else {
+      res.status(500).send(`We could not find the user by the Id ${id}`);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(`We could not find the user by the Id ${id}`);
+  }
+}
