@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ChakraProvider, theme } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import Error from "./components/Error/Error";
 import NavBar from "./components/NavBar/NavBar";
@@ -14,8 +15,22 @@ import QuienesSomos from "./components/QuienesSomos/QuienesSomos";
 import Contacto from "./components/Contacto/Contacto";
 import CowCuts from "./components/CowCuts/CowCuts";
 import PigCuts from "./components/PigCuts/PigCuts";
+import { useUserStore } from "./store/userStore";
 
 function App() {
+  const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+
+  const UserStore = useUserStore();
+  useEffect(() => {
+    const fetchData = async () => {
+      if (user && isAuthenticated) {
+        await UserStore.createUser(user);
+      }
+    };
+
+    fetchData();
+  }, [user, isAuthenticated]);
+
   return (
     <ChakraProvider theme={theme}>
       <NavBar />
