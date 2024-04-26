@@ -5,17 +5,12 @@ import React, { useEffect } from "react";
 import { useUserStore } from "../../store/userStore";
 
 const LogInButton: React.FC<{}> = () => {
-  const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
 
-  const { userByMail, createUser, modifyUser } = useUserStore();
+  const UserStore = useUserStore();
 
-  const handleClick = () => {
-    if (user && user.email) {
-      const newUser = createUser(user);
-      console.log(newUser);
-    } else {
-      loginWithRedirect();
-    }
+  const handleClick = async () => {
+    loginWithRedirect();
   };
 
   return (
