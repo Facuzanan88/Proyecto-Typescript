@@ -9,7 +9,7 @@ interface UserStoreState extends UserAttributes {
   getUsers: () => Promise<UserAttributes[]>;
   createUser: (user: object) => Promise<UserAtributtes>;
   userByMail: (email: string) => Promise<UserAtributtes> | null;
-  modifyUser: (idUser: string, updateUser: object) => Promise<void>;
+  modifyUser: (updateUser: object) => Promise<void>;
 }
 
 export const useUserStore = create<UserStoreState>((set) => ({
@@ -103,26 +103,26 @@ export const useUserStore = create<UserStoreState>((set) => ({
       console.error("Error al obtener el usuario:", error);
     }
   },
-  modifyUser: async (id: string, user: object) => {
+  modifyUser: async (updateUser: object) => {
     // ARREGLAR FUNCION
     try {
-      const res = await axios.put("http://localhost:3001/users", user);
-      const newUser = await res.data;
+      const res = await axios.put("http://localhost:3001/users", updateUser);
+      const modifyUser = await res.data;
 
       set((state) => ({
         ...state,
         user: {
-          id: newUser.id,
-          name: newUser.name,
-          lastname: newUser.lastname,
-          photo: newUser.photo,
-          age: newUser.age,
-          email: newUser.email,
-          cel: newUser.cel,
-          street: newUser.street,
-          number: newUser.number,
-          apartment: newUser.apartment,
-          comment: newUser.comment,
+          id: modifyUser.id,
+          name: modifyUser.name,
+          lastname: modifyUser.lastname,
+          photo: modifyUser.photo,
+          age: modifyUser.age,
+          email: modifyUser.email,
+          cel: modifyUser.cel,
+          street: modifyUser.street,
+          number: modifyUser.number,
+          apartment: modifyUser.apartment,
+          comment: modifyUser.comment,
         },
       }));
     } catch (error) {
