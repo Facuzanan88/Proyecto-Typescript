@@ -107,7 +107,7 @@ const Registro: React.FC<{}> = () => {
     usuario.apartment = isChecked; // NO FUNCIONA EL isChecked
 
     if (captcha.current?.getValue()) {
-      console.log("el usuario no es un robot");
+      console.log("el usuario esta verificado");
       setUsuarioValido(true);
       setCaptchaValido(true);
       Swal.fire({
