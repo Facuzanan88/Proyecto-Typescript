@@ -30,8 +30,8 @@ export default function QuienesSomos() {
           maxH={"full"}
           fontSize={"xs"}
         >
-          LOS PEDIDOS SE ENTREGAN AL OTRO DÍA DE REALIZADA LA COMPRA. NO HAY
-          ENTREGAS LOS DOMINGOS.
+          LAS ENTREGAS SON SIN COSTO A PARTIR DE $30000. LOS PEDIDOS SE ENTREGAN
+          AL OTRO DÍA DE REALIZADA LA COMPRA. NO HAY ENTREGAS LOS DOMINGOS.
         </Text>
       </Stack>
       <Container maxW={"full"}>
