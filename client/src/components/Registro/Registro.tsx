@@ -117,7 +117,7 @@ const Registro: React.FC<{}> = () => {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Si, borralo",
       }).then(async (result) => {
         if (result.isConfirmed && user?.email) {
           const newUser = await UserStore.userByMail(user.email);
